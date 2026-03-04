@@ -44,7 +44,21 @@
 .bval { font-size: 12px; color: var(--tx2); width: 30px; text-align: right; flex-shrink: 0; }
 
 /* ── KEYWORD CLOUD ────────────────────────────────── */
-.kwcloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.kwcloud-wrap {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 12px;
+  background: var(--bg2);
+  scrollbar-width: thin;
+  scrollbar-color: var(--bd) transparent;
+}
+.kwcloud-wrap::-webkit-scrollbar       { width: 4px; }
+.kwcloud-wrap::-webkit-scrollbar-track { background: transparent; }
+.kwcloud-wrap::-webkit-scrollbar-thumb { background: var(--bd); border-radius: 2px; }
+
+.kwcloud { display: flex; flex-wrap: wrap; gap: 8px; }
 .kwitem {
   padding: 6px 14px;
   border-radius: 9999px;
@@ -58,6 +72,65 @@
 .kwitem:hover { border-color: var(--bl); color: var(--bl); background: var(--bl2); }
 .kwitem.lg    { font-size: 18px; padding: 8px 18px; color: var(--tx); }
 .kwitem.md    { font-size: 15px; padding: 7px 15px; }
+
+/* ── CHART CONTROLS ───────────────────────────────── */
+.chart-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.chart-unit-btns { display: flex; gap: 4px; }
+.chart-unit-btn {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--bd);
+  background: transparent;
+  color: var(--tx2);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--fn);
+  cursor: pointer;
+  transition: all .15s;
+}
+.chart-unit-btn:hover { border-color: var(--bl); color: var(--bl); background: var(--bl2); }
+.chart-unit-btn.on    { border-color: var(--bl); color: var(--bl); background: var(--bl2); }
+
+.chart-date-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.chart-date-range input[type="date"] {
+  background: #202327;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  color: var(--tx);
+  font-family: var(--fn);
+  font-size: 12px;
+  padding: 4px 8px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color .15s;
+  color-scheme: dark;
+}
+.chart-date-range input[type="date"]:focus { border-color: var(--bl); }
+.chart-date-sep { color: var(--tx2); font-size: 12px; }
+.chart-reset-btn {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(244,33,46,.4);
+  background: rgba(244,33,46,.08);
+  color: var(--rd);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--fn);
+  cursor: pointer;
+  transition: background .15s;
+}
+.chart-reset-btn:hover { background: rgba(244,33,46,.18); }
 
 /* ── TIME SERIES CHART WRAPPER ────────────────────── */
 .chart-wrap {

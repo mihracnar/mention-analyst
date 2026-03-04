@@ -73,7 +73,7 @@ function gL() {
   var q  = S.q.toLowerCase().trim();
   var at = Object.keys(S.th).filter(function(k) { return S.th[k]; });
   return pool().filter(function(t) {
-    var mq = !q || (t.bd + t.kw + t.nm + t.u).toLowerCase().indexOf(q) >= 0;
+    var mq = !q || (t.bd + t.kw + t.nm + " @" + t.u).toLowerCase().indexOf(q) >= 0;
     var mt = at.length === 0 || at.some(function(k) {
       return t.kw.toLowerCase().indexOf(k.toLowerCase()) >= 0;
     });

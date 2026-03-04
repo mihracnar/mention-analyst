@@ -1,13 +1,26 @@
 /* =====================================================
-   render/stats.js — renders the Statistics view
+   render/stats.js — Statistics view
+   SC : persistent chart state (unit + date range)
    ===================================================== */
+
+var SC = { unit: "day", from: "", to: "" };
 
 function rStats() {
   var c   = counts();
   var tot = c.T || 1;
   function pct(n) { return Math.round(n / tot * 100); }
 
-  /* ── keyword cloud ── */
+  /* ── helper ── */
+  function toDateStr(d) {
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  }
+
+  /* ── date bounds from full dataset ── */
+  var allTs = D.map(function(t) { var d = new Date(t.dt); return isNaN(d) ? null : d.getTime(); }).filter(Boolean);
+  var minStr = allTs.length ? toDateStr(new Date(Math.min.apply(null, allTs))) : "";
+  var maxStr = allTs.length ? toDateStr(new Date(Math.max.apply(null, allTs))) : "";
+
+  /* ── keyword cloud (always full dataset) ── */
   var kwc = {};
   D.forEach(function(t) {
     t.kw.split(",").forEach(function(k) {
@@ -17,42 +30,50 @@ function rStats() {
   });
   var kws = Object.keys(kwc).sort(function(a, b) { return kwc[b] - kwc[a]; });
   var mx  = kws.length ? kwc[kws[0]] : 1;
-
-  var cloud = '<div class="kwcloud">';
+  var cloud = '<div class="kwcloud-wrap"><div class="kwcloud">';
   kws.forEach(function(k) {
     var r   = kwc[k] / mx;
     var cls = r >= .8 ? "lg" : r >= .5 ? "md" : "";
     cloud += '<div class="kwitem ' + cls + '" data-kw="' + k + '" style="cursor:pointer">'
       + k + ' <span style="color:var(--bl);font-size:11px">' + kwc[k] + "</span></div>";
   });
-  cloud += "</div>";
+  cloud += "</div></div>";
 
-  /* ── daily buckets for time series ── */
+  /* ── filter dataset for time series by date range ── */
+  var tsD = D.filter(function(t) {
+    if (!SC.from && !SC.to) return true;
+    var d = new Date(t.dt);
+    if (isNaN(d)) return true;
+    var ds = toDateStr(d);
+    if (SC.from && ds < SC.from) return false;
+    if (SC.to   && ds > SC.to)   return false;
+    return true;
+  });
+
+  /* ── daily buckets ── */
   var dayMap = {};
-  D.forEach(function(t) {
+  tsD.forEach(function(t) {
     var d = new Date(t.dt);
     if (isNaN(d)) return;
-    var key = d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+    var key = toDateStr(d);
     if (!dayMap[key]) dayMap[key] = { P: 0, N: 0, NE: 0, total: 0 };
     dayMap[key][t.s]++;
     dayMap[key].total++;
   });
-  var days = Object.keys(dayMap).sort();
+  var days  = Object.keys(dayMap).sort();
+  var gMode = SC.unit; /* gün / hafta / ay — user-chosen, no auto */
 
-  var groupMode = "day";
-  if (days.length > 60)  groupMode = "week";
-  if (days.length > 180) groupMode = "month";
-
+  /* ── aggregate into chosen buckets ── */
   var buckets = {};
   days.forEach(function(dk) {
     var d = new Date(dk), bk;
-    if (groupMode === "month") {
+    if (gMode === "month") {
       bk = d.getFullYear() + "-" + pad(d.getMonth() + 1);
-    } else if (groupMode === "week") {
+    } else if (gMode === "week") {
       var dow = d.getDay() || 7;
       var mon = new Date(d);
       mon.setDate(d.getDate() - dow + 1);
-      bk = mon.getFullYear() + "-" + pad(mon.getMonth() + 1) + "-" + pad(mon.getDate());
+      bk = toDateStr(mon);
     } else {
       bk = dk;
     }
@@ -70,7 +91,7 @@ function rStats() {
 
   var MONTHS = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
   function fmtKey(k) {
-    if (groupMode === "month") {
+    if (gMode === "month") {
       var p = k.split("-"); return MONTHS[parseInt(p[1]) - 1] + " " + p[0].slice(2);
     }
     var p = k.split("-"); return p[2] + "/" + p[1];
@@ -80,10 +101,9 @@ function rStats() {
   var n    = bkeys.length || 1;
   var svgW = Math.max(600, n * 20);
   var svgH = 160, padL = 28, padR = 8, padT = 10, padB = 32;
-  var cW = svgW - padL - padR, cH = svgH - padT - padB;
-  var bw = Math.max(4, Math.floor(cW / n) - 2);
-  var p  = [];
-  p.push('<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" preserveAspectRatio="none" style="width:100%;height:160px;display:block">');
+  var cW   = svgW - padL - padR, cH = svgH - padT - padB;
+  var bw   = Math.max(4, Math.floor(cW / n) - 2);
+  var p    = ['<svg viewBox="0 0 ' + svgW + " " + svgH + '" preserveAspectRatio="none" style="width:100%;height:160px;display:block">'];
   for (var gi = 0; gi <= 4; gi++) {
     var gy = padT + cH - Math.round(gi / 4 * cH);
     var gv = Math.round(gi / 4 * bmax);
@@ -110,9 +130,32 @@ function rStats() {
   p.push("</svg>");
   var svgChart = p.join("");
 
-  var gmodeLabel = groupMode === "month" ? "Aylık" : groupMode === "week" ? "Haftalık" : "Günlük";
-  var spanLabel  = days.length > 0 ? fmtKey(bkeys[0]) + " – " + fmtKey(bkeys[bkeys.length - 1]) : "";
+  /* ── unit buttons ── */
+  var unitBtns = [["day","Gün"],["week","Hafta"],["month","Ay"]].map(function(u) {
+    return '<button class="chart-unit-btn' + (SC.unit === u[0] ? " on" : "") + '" data-unit="' + u[0] + '">' + u[1] + "</button>";
+  }).join("");
 
+  /* ── date range controls ── */
+  var hasFilter = SC.from || SC.to;
+  var dateCtrl = '<div class="chart-date-range">'
+    + '<input type="date" id="chart-from" value="' + (SC.from || "") + '" min="' + minStr + '" max="' + maxStr + '">'
+    + '<span class="chart-date-sep">—</span>'
+    + '<input type="date" id="chart-to"   value="' + (SC.to   || "") + '" min="' + minStr + '" max="' + maxStr + '">'
+    + (hasFilter ? '<button class="chart-reset-btn" id="chart-reset">Tümü</button>' : "")
+    + "</div>";
+
+  var controls = '<div class="chart-controls">'
+    + '<div class="chart-unit-btns">' + unitBtns + "</div>"
+    + dateCtrl
+    + "</div>";
+
+  var spanNote = days.length > 0
+    ? (SC.from || SC.to
+        ? (SC.from || "…") + " – " + (SC.to || "…")
+        : fmtKey(bkeys[0]) + " – " + fmtKey(bkeys[bkeys.length - 1]))
+    : "";
+
+  /* ── assemble HTML ── */
   document.getElementById("stats-c").innerHTML = ""
     + '<div class="sec-title">Genel İstatistikler</div>'
     + '<div class="sgrid">'
@@ -135,9 +178,9 @@ function rStats() {
     + "</div>"
     + "<div>"
     + '  <div class="sec-title">Mention Zaman Serisi'
-    + '    <span style="font-size:11px;font-weight:400;color:var(--tx2);margin-left:8px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:2px 8px">' + gmodeLabel + "</span>"
-    + (spanLabel ? '<span style="font-size:11px;font-weight:400;color:var(--tx2);margin-left:6px">' + spanLabel + "</span>" : "")
+    + (spanNote ? '<span style="font-size:11px;font-weight:400;color:var(--tx2);margin-left:8px">' + spanNote + "</span>" : "")
     + "  </div>"
+    + controls
     + '  <div class="chart-legend">'
     + '    <span><span class="legend-dot" style="background:#00ba7c"></span>Olumlu</span>'
     + '    <span><span class="legend-dot" style="background:#f4212e"></span>Olumsuz</span>'
@@ -145,7 +188,18 @@ function rStats() {
     + "  </div>"
     + '  <div class="chart-wrap">' + svgChart + "</div>"
     + '  <div class="chart-note">'
-    + (days.length <= 1 ? "Zaman serisi için en az 2 günlük veri gerekli." : n + " " + gmodeLabel.toLowerCase() + " dönem · Çubuklar istiflenmiş duygu dağılımını gösterir")
+    + (tsD.length < 2 ? "Seçilen aralıkta yeterli veri yok." : n + " " + (gMode==="month"?"aylık":gMode==="week"?"haftalık":"günlük") + " dönem")
     + "  </div>"
     + "</div>";
+
+  /* ── bind controls ── */
+  document.querySelectorAll(".chart-unit-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() { SC.unit = this.getAttribute("data-unit"); rStats(); });
+  });
+  var fi = document.getElementById("chart-from");
+  var ti = document.getElementById("chart-to");
+  var rb = document.getElementById("chart-reset");
+  if (fi) fi.addEventListener("change", function() { SC.from = this.value; rStats(); });
+  if (ti) ti.addEventListener("change", function() { SC.to   = this.value; rStats(); });
+  if (rb) rb.addEventListener("click",  function() { SC.from = ""; SC.to = ""; rStats(); });
 }

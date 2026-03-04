@@ -95,13 +95,13 @@ function rFeed() {
 
     out += '<div class="tcard" style="animation-delay:' + (i * 0.04) + 's">'
       + '<div class="tavcol">'
-      + '  <div class="tav" style="background:' + ac(t.u) + '">' + ini(t.nm) + "</div>"
+      + '  <div class="tav" style="background:' + ac(t.u) + ';cursor:pointer" data-user="' + t.u + '">' + ini(t.nm) + "</div>"
       + (t.rt ? '<div class="tline"></div>' : "")
       + "</div>"
       + '<div class="tright">'
       + '  <div class="thead">'
-      + '    <span class="tnm">' + t.nm + "</span>"
-      + '    <span class="thn">@' + t.u + "</span>"
+      + '    <span class="tnm" data-user="' + t.u + '" style="cursor:pointer">' + t.nm + "</span>"
+      + '    <span class="thn" data-user="' + t.u + '" style="cursor:pointer">@' + t.u + "</span>"
       + '    <span class="ttm">· ' + fd(t.dt) + "</span>"
       + '    <div class="spill" style="background:' + f.bg + ";color:" + f.c + ";border:1px solid " + f.bd + '">' + f.l + "</div>"
       + "  </div>"

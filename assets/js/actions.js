@@ -73,7 +73,21 @@ function goView(v) {
     document.getElementById("view-" + n).classList.toggle("on", n === v);
     document.getElementById("nav-" + n).classList.toggle("on",  n === v);
   });
+  if (v !== "mentions") window.scrollTo(0, 0);
   if (v === "stats")   rStats();
   if (v === "network") rNetwork();
   if (v === "info")    rInfo();
+}
+
+/** Reset all filters and jump to Mentions at the top. Bound to the logo. */
+function resetToMentions() {
+  S.tab = "T";
+  S.th  = {};
+  S.q   = "";
+  var inp = document.getElementById("si");
+  if (inp) inp.value = "";
+  var xb = document.getElementById("xb");
+  if (xb) xb.style.display = "none";
+  goView("mentions");
+  window.scrollTo(0, 0);
 }

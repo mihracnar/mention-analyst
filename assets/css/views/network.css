@@ -1,8 +1,8 @@
 /* =====================================================
-   views/network.css — network view specific styles
+   views/network.css
    ===================================================== */
 
-/* ── SENTIMENT TABS (user list) ────────────────────── */
+/* ── SENTIMENT TABS ────────────────────────────────── */
 .nw-stab {
   display: inline-flex;
   padding: 5px 14px;
@@ -19,10 +19,10 @@
 .nw-stab:hover { border-color: var(--bl); color: var(--bl); background: var(--bl2); }
 .nw-stab.on    { font-weight: 700; }
 
-/* ── SEARCH (user list) ────────────────────────────── */
+/* ── SEARCH ────────────────────────────────────────── */
 .nw-search-wrap {
   position: relative;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 .nw-search-wrap svg {
   position: absolute;
@@ -63,24 +63,50 @@
   text-align: center;
 }
 
+/* count label */
+.nw-user-count {
+  font-size: 12px;
+  color: var(--tx2);
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+/* ── SCROLLABLE USER LIST ──────────────────────────── */
+.nw-user-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 0 12px;
+  background: var(--bg2);
+  /* custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--bd) transparent;
+}
+.nw-user-scroll::-webkit-scrollbar       { width: 4px; }
+.nw-user-scroll::-webkit-scrollbar-track { background: transparent; }
+.nw-user-scroll::-webkit-scrollbar-thumb { background: var(--bd); border-radius: 2px; }
+
+.nw-empty {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--tx2);
+  font-size: 14px;
+}
+
 /* ── USER CARD ─────────────────────────────────────── */
 .ucard {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 12px 0;
+  padding: 11px 0;
   border-bottom: 1px solid var(--bd2);
   cursor: pointer;
   transition: background .12s;
+  border-radius: 6px;
 }
 .ucard:last-child { border-bottom: none; }
-.ucard:hover {
-  background: var(--bg-h);
-  margin: 0 -4px;
-  padding-left: 4px;
-  padding-right: 4px;
-  border-radius: 8px;
-}
+.ucard:hover      { background: var(--bg-h); padding-left: 4px; padding-right: 4px; margin: 0 -4px; }
 
 .uav {
   width: 38px;
@@ -106,9 +132,6 @@
   flex-wrap: wrap;
 }
 .sent-dot {
-  display: flex;
-  align-items: center;
-  gap: 3px;
   font-size: 11px;
   font-weight: 600;
   padding: 2px 8px;
@@ -118,25 +141,16 @@
 .sent-dot.N  { background: var(--rd2); color: var(--rd); }
 .sent-dot.NE { background: var(--am2); color: var(--am); }
 
-.nw-more-btn {
-  display: block;
-  width: 100%;
-  margin-top: 10px;
-  padding: 9px;
-  background: var(--bg2);
-  border: 1px solid var(--bd);
-  border-radius: 10px;
-  color: var(--bl);
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--fn);
-  cursor: pointer;
-  transition: background .15s;
-  text-align: center;
+/* ── THEME LIST SCROLL WRAPPER ─────────────────────── */
+.nw-theme-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bd) transparent;
 }
-.nw-more-btn:hover           { background: var(--bl2); }
-.nw-more-btn.secondary       { color: var(--tx2); }
-.nw-more-btn.secondary:hover { background: var(--bg3); color: var(--tx); }
+.nw-theme-scroll::-webkit-scrollbar       { width: 4px; }
+.nw-theme-scroll::-webkit-scrollbar-track { background: transparent; }
+.nw-theme-scroll::-webkit-scrollbar-thumb { background: var(--bd); border-radius: 2px; }
 
 /* ── THEME ACCORDION ───────────────────────────────── */
 .theme-block-wrap {
@@ -205,6 +219,7 @@
 }
 .theme-block-wrap.open .theme-accordion-body { display: block; }
 
+/* avatar grid */
 .theme-avatars {
   display: flex;
   flex-wrap: wrap;
@@ -239,6 +254,7 @@
   white-space: nowrap;
 }
 
+/* +N badge (only shown when accordion closed) */
 .av-more-badge {
   width: 34px;
   height: 34px;
@@ -257,6 +273,7 @@
 }
 .av-more-badge:hover { background: var(--bl2); border-color: var(--bl); }
 
+/* section hint */
 .section-hint {
   font-size: 12px;
   color: var(--tx2);

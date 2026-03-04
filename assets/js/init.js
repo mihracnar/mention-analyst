@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", function() {
   /* ── populate top badge ── */
   rBadge();
 
+  /* logo → reset all filters & go to mentions */
+  var logoBtn = document.getElementById("logo-btn");
+  if (logoBtn) logoBtn.addEventListener("click", resetToMentions);
+
   /* ── search input & clear button ── */
   var inp = document.getElementById("si");
   var xb  = document.getElementById("xb");
@@ -57,9 +61,12 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
 
-    /* user row (in network) */
+    /* user avatar / name / handle in feed → filter by user */
     if ((el = e.target.closest("[data-user]"))) {
-      goUser(el.getAttribute("data-user"));
+      /* only act when inside the feed view, not network */
+      if (CV === "mentions") {
+        goUser(el.getAttribute("data-user"));
+      }
       return;
     }
   });
