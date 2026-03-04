@@ -1,0 +1,93 @@
+/* =====================================================
+   views/stats.css — stats view specific styles
+   ===================================================== */
+
+/* ── SUMMARY GRID ─────────────────────────────────── */
+.sgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.sbox {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sbox-n { font-size: 28px; font-weight: 800; }
+.sbox-l { font-size: 13px; color: var(--tx2); }
+
+/* ── SENTIMENT DISTRIBUTION BARS ─────────────────── */
+.brow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.blab { font-size: 13px; color: var(--tx2); width: 68px; flex-shrink: 0; }
+.btrk {
+  flex: 1;
+  height: 8px;
+  background: var(--bg2);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--bd);
+}
+.bfil {
+  height: 100%;
+  border-radius: 4px;
+  transition: width .6s ease;
+}
+.bval { font-size: 12px; color: var(--tx2); width: 30px; text-align: right; flex-shrink: 0; }
+
+/* ── KEYWORD CLOUD ────────────────────────────────── */
+.kwcloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.kwitem {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--bd);
+  color: var(--tx2);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+}
+.kwitem:hover { border-color: var(--bl); color: var(--bl); background: var(--bl2); }
+.kwitem.lg    { font-size: 18px; padding: 8px 18px; color: var(--tx); }
+.kwitem.md    { font-size: 15px; padding: 7px 15px; }
+
+/* ── TIME SERIES CHART WRAPPER ────────────────────── */
+.chart-wrap {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 12px 8px 6px;
+  overflow-x: auto;
+}
+.chart-legend {
+  display: flex;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--tx2);
+  margin: 6px 0 8px;
+}
+.chart-legend span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.chart-note {
+  font-size: 11px;
+  color: var(--tx2);
+  margin-top: 5px;
+  text-align: center;
+}

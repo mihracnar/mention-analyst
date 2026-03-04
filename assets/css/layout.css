@@ -1,0 +1,110 @@
+/* =====================================================
+   layout.css — topbar · mentions sticky header · bottom nav
+   ===================================================== */
+
+/* ── TOP BAR ──────────────────────────────────────── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(0,0,0,0.90);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--bd);
+}
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--topbar-h);
+  padding: 0 16px;
+}
+
+/* logo */
+.tlogo {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tlogo svg { width: 100%; height: 100%; }
+
+/* app title */
+.ttitle {
+  font-size: 15px;
+  font-weight: 700;
+  flex: 1;
+}
+
+/* total mention badge */
+.total-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  padding: 4px 12px;
+}
+.total-badge-n {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--bl);
+}
+.total-badge-l {
+  font-size: 9px;
+  color: var(--tx2);
+  margin-top: 1px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+/* ── MENTIONS STICKY SUB-HEADER ───────────────────── */
+.mentions-sticky {
+  position: sticky;
+  top: var(--topbar-h);
+  z-index: 50;
+  background: var(--bg);
+}
+
+/* ── BOTTOM NAV ───────────────────────────────────── */
+.bnav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--bd);
+  padding: 8px 0;
+  z-index: 100;
+}
+.ntab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 4px;
+  cursor: pointer;
+  color: var(--tx2);
+  transition: color .15s;
+  border-radius: 10px;
+  margin: 0 2px;
+}
+.ntab:hover { color: var(--tx); background: rgba(231,233,234,0.05); }
+.ntab.on    { color: var(--bl); }
+.nico {
+  width: 44px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+}
+.ntab.on .nico { background: var(--bl2); }
+.ntab svg { width: 22px; height: 22px; }
+.nlbl { font-size: 10px; font-weight: 500; }

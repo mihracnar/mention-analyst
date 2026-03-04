@@ -1,0 +1,30 @@
+/* ===== DATA ===== */
+var D = [
+  /* TWITTER (X) - KURUMSAL VE SİYASİ ETKİLEŞİM */
+  {id:1,  pl:"X",  rt:"Tarihi konak restorasyonu hakkında", dt:"Wed Mar 04 10:20:00 +0000 2026", u:"mimarlar_odasi",    nm:"Mimarlar Odası Bşk.", bd:"Restorasyon projesinde aslına uygun olmayan malzeme kullanımı tespit ettik. Acil açıklama bekliyoruz.", lk:"https://x.com", s:"N",  kw:"restorasyon, eleştiri"},
+  {id:2,  pl:"X",  rt:"",                                   dt:"Tue Mar 03 14:10:00 +0000 2026", u:"arkeo_haber",       nm:"Arkeoloji Haber",     bd:"Kültürel miras alanındaki vizyoner projeleri için bürokratımıza teşekkürler. UNESCO adaylığı yolda!", lk:"https://x.com", s:"P",  kw:"UNESCO, başarı"},
+  {id:3,  pl:"X",  rt:"Yeni Müze Projesi",                  dt:"Mon Mar 02 09:30:00 +0000 2026", u:"vatandas_can",      nm:"Caner Bakır",         bd:"Şehir müzesi projesi ne zaman bitecek? Kaç yıldır tabeladan öteye geçmedi.", lk:"https://x.com", s:"N",  kw:"şikayet, müze"},
+  {id:4,  pl:"X",  rt:"",                                   dt:"Sun Mar 01 11:45:00 +0000 2026", u:"tarih_sever",       nm:"Selim Ak",            bd:"Kültürel miras sadece taş değildir, ruhudur. Bu bilinci aşılayan çalışmaları değerli buluyorum.", lk:"https://x.com", s:"P",  kw:"kültür, destek"},
+  {id:5,  pl:"X",  rt:"Sokak Sağlıklaştırma",               dt:"Sat Feb 28 20:15:00 +0000 2026", u:"yerel_iz",          nm:"Zeynep Koç",          bd:"Sokak sağlıklaştırma projesinden sonra mahallenin çehresi değişti, emeği geçenlere teşekkürler.", lk:"https://x.com", s:"P",  kw:"restorasyon, teşekkür"},
+
+  /* INSTAGRAM - SERGİ, ETKİNLİK VE GÖRSEL ODAK */
+  {id:6,  pl:"IG", rt:"Instagram Post: Antik Kent Gezisi",  dt:"Wed Mar 04 08:30:00 +0000 2026", u:"gezgin_ruhu",       nm:"Mert Gezgin",         bd:"Antik kentin girişindeki çevre düzenlemesi çok zayıf, her yer çöp içinde. Yakışmıyor.", lk:"https://instagram.com", s:"N",  kw:"çevre, antik kent"},
+  {id:7,  pl:"IG", rt:"Instagram Reel: Restorasyon Süreci", dt:"Tue Mar 03 19:45:00 +0000 2026", u:"sanat_tarihci",     nm:"Fatma Şef",           bd:"İşçilik gerçekten muazzam. Gelecek kuşaklara bırakılacak en büyük miras bu.", lk:"https://instagram.com", s:"P",  kw:"sanat, tebrik"},
+  {id:8,  pl:"IG", rt:"Instagram Story",                    dt:"Mon Mar 02 12:00:00 +0000 2026", u:"ebru_art",          nm:"Ebru Sanat",          bd:"Belediyenin açtığı geleneksel el sanatları sergisi mutlaka görülmeli. İlham verici!", lk:"https://instagram.com", s:"P",  kw:"sergi, sanat"},
+  {id:9,  pl:"IG", rt:"Instagram Post",                     dt:"Sun Mar 01 15:20:00 +0000 2026", u:"kultur_elcisi",     nm:"Deniz Aydın",         bd:"Tarihi surlardaki ışıklandırma çalışması çok estetik olmuş, gece yürüyüşü çok keyifli.", lk:"https://instagram.com", s:"P",  kw:"ışıklandırma, teşekkür"},
+  {id:10, pl:"IG", rt:"Instagram Reel",                     dt:"Sat Feb 28 22:10:00 +0000 2026", u:"sehir_rehberi",     nm:"Arda Y.",             bd:"Giriş ücretleri çok yüksek. Yerel halk kendi kültürel mirasını göremiyor.", lk:"https://instagram.com", s:"N",  kw:"fiyat, şikayet"},
+
+  /* YOUTUBE - DETAYLI ANALİZ, BELGESEL VE PANEL YORUMLARI */
+  {id:11, pl:"YT", rt:"YouTube: Restorasyon Paneli",        dt:"Wed Mar 04 11:00:00 +0000 2026", u:"akademik_bakis",    nm:"Doç. Dr. Kerem",      bd:"Paneldeki açıklamalar tatmin ediciydi ancak bütçe yönetimi konusunda hala gri alanlar var.", lk:"https://youtube.com", s:"NE", kw:"panel, bütçe"},
+  {id:12, pl:"YT", rt:"YouTube: Tanıtım Belgeseli",         dt:"Tue Mar 03 15:30:00 +0000 2026", u:"belgesel_tr",       nm:"Aslı Yılmaz",         bd:"Şehrin tarihini bu kadar güzel anlatan bir video olmamıştı. Bürokratımızın emeği büyük.", lk:"https://youtube.com", s:"P",  kw:"belgesel, teşekkür"},
+  {id:13, pl:"YT", rt:"YouTube: Kazı Çalışmaları Güncesi",  dt:"Mon Mar 02 10:10:00 +0000 2026", u:"arkeo_ogrenci",     nm:"Emre Kitap",          bd:"Kazı alanına gönüllü kabul ediyor musunuz? Öğrenciler için staj imkanı var mı?", lk:"https://youtube.com", s:"NE", kw:"soru, eğitim"},
+  {id:14, pl:"YT", rt:"YouTube: Kültürel Miras Raporu",     dt:"Sun Mar 01 23:30:00 +0000 2026", u:"muhalif_kanal",     nm:"Yavuz Spor",          bd:"Rapor toz pembe çizilmiş ama sahada durum farklı. Tarihi evler hala dökülüyor.", lk:"https://youtube.com", s:"N",  kw:"eleştiri, rapor"},
+  {id:15, pl:"YT", rt:"YouTube: Gastronomi Müzesi Açılışı", dt:"Sat Feb 28 16:40:00 +0000 2026", u:"lezzet_avcisi",     nm:"Oğuz K.",             bd:"Böyle bir müze gastronomi turizmi için harika bir adım. Tebrik ediyorum.", lk:"https://youtube.com", s:"P",  kw:"müze, turizm"},
+
+  /* KARMA VE GÜNCEL VERİLER */
+  {id:16, pl:"X",  rt:"",                                   dt:"Wed Mar 04 09:15:00 +0000 2026", u:"haber_anlik",       nm:"Yerel Gündem",        bd:"Bürokratımızdan flaş açıklama: 'Tarihi çarşının restorasyonuna haftaya başlıyoruz.'", lk:"https://x.com", s:"NE", kw:"haber, çarşı"},
+  {id:17, pl:"IG", rt:"Instagram Post",                     dt:"Tue Mar 03 11:05:00 +0000 2026", u:"pati_dostu",        nm:"Selin Pati",          bd:"Restorasyon alanındaki sahipsiz kediler için barınma alanı oluşturulması çok ince bir düşünce.", lk:"https://instagram.com", s:"P",  kw:"hayvan hakları, destek"},
+  {id:18, pl:"YT", rt:"YouTube: Şehir Planlama Dersi",      dt:"Mon Mar 02 18:20:00 +0000 2026", u:"planlama_atolyesi", nm:"Ezgi Tan",            bd:"Kültürel miras ve modern şehir planlaması dengesini nasıl kuruyorsunuz? Çok zor bir iş.", lk:"https://youtube.com", s:"NE", kw:"soru, planlama"},
+  {id:19, pl:"X",  rt:"Eleştiriye Yanıt",                   dt:"Sun Mar 01 07:00:00 +0000 2026", u:"mimari_miras",      nm:"Hülya Koç",           bd:"Eleştirilere kulak verilmesi ve projenin revize edilmesi büyük bir olgunluk. Teşekkürler.", lk:"https://x.com", s:"P",  kw:"revizyon, diyalog"},
+  {id:20, pl:"IG", rt:"Instagram Story",                    dt:"Sat Feb 28 13:30:00 +0000 2026", u:"lifestyle_ezgi",    nm:"Ezgi Aydın",          bd:"Bugünkü tarih yürüyüşü harikaydı, her ay tekrarlanmalı!", lk:"https://instagram.com", s:"P",  kw:"etkinlik, teşekkür"}
+];

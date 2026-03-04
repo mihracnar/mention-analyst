@@ -1,0 +1,90 @@
+/* =====================================================
+   base.css — reset · CSS variables · typography
+   ===================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  /* backgrounds */
+  --bg:   #000;
+  --bg2:  #16181c;
+  --bg3:  #1d1f23;
+  --bg-h: #080808;
+
+  /* borders */
+  --bd:  #2f3336;
+  --bd2: #1d1f23;
+
+  /* text */
+  --tx:  #e7e9ea;
+  --tx2: #71767b;
+
+  /* sentiment: blue (neutral/brand) */
+  --bl:  #1d9bf0;
+  --bl2: rgba(29,155,240,0.10);
+
+  /* sentiment: green (positive) */
+  --gr:  #00ba7c;
+  --gr2: rgba(0,186,124,0.12);
+
+  /* sentiment: red (negative) */
+  --rd:  #f4212e;
+  --rd2: rgba(244,33,46,0.12);
+
+  /* sentiment: amber (neutral/mixed) */
+  --am:  #ffad1f;
+  --am2: rgba(255,173,31,0.12);
+
+  /* typography */
+  --fn: 'Inter', -apple-system, sans-serif;
+
+  /* layout */
+  --topbar-h: 52px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fn);
+  background: var(--bg);
+  color: var(--tx);
+  padding-bottom: 70px;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 0; }
+
+/* ── views ── */
+.view    { display: none; }
+.view.on { display: block; }
+
+/* ── empty state ── */
+.empty { text-align: center; padding: 60px 20px; }
+.ei    { font-size: 40px; margin-bottom: 12px; opacity: .3; }
+.et    { font-size: 17px; font-weight: 700; color: var(--tx); margin-bottom: 6px; }
+.es    { font-size: 14px; color: var(--tx2); }
+
+/* ── section title ── */
+.sec-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--tx);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--bd);
+  margin-bottom: 4px;
+}
+
+/* ── section wrappers ── */
+.sview, .nview, .iview {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

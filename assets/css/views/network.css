@@ -1,0 +1,124 @@
+/* =====================================================
+   views/network.css — network view specific styles
+   ===================================================== */
+
+/* ── USER CARD WITH SENTIMENT BREAKDOWN ───────────── */
+.ucard {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--bd2);
+  cursor: pointer;
+}
+.ucard:last-child { border-bottom: none; }
+
+.uav {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.ucard-info { flex: 1; min-width: 0; }
+.unm { font-size: 14px; font-weight: 600; color: var(--tx); }
+.uhn { font-size: 13px; color: var(--tx2); }
+
+/* sentiment pill row inside user card */
+.sent-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+.sent-dot {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+.sent-dot.P  { background: var(--gr2); color: var(--gr); }
+.sent-dot.N  { background: var(--rd2); color: var(--rd); }
+.sent-dot.NE { background: var(--am2); color: var(--am); }
+
+/* ── THEME → USER DISTRIBUTION ────────────────────── */
+.theme-block-wrap {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.theme-block-wrap:last-child { margin-bottom: 0; }
+
+.theme-user-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bl);
+}
+.theme-user-label .pill {
+  background: var(--bl2);
+  border: 1px solid rgba(29,155,240,.3);
+  border-radius: 9999px;
+  padding: 2px 10px;
+}
+.theme-user-label .count {
+  color: var(--tx2);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* avatar grid inside theme block */
+.theme-avatars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.theme-avatar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.mini-av {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: #fff;
+}
+.mini-nm {
+  font-size: 10px;
+  color: var(--tx2);
+  max-width: 52px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* section hint text */
+.section-hint {
+  font-size: 12px;
+  color: var(--tx2);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}

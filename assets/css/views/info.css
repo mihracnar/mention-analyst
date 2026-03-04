@@ -1,0 +1,61 @@
+/* =====================================================
+   views/info.css — info / about view specific styles
+   ===================================================== */
+
+.icard {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 16px;
+}
+.icard-t {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 12px;
+}
+.irow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bd2);
+  font-size: 14px;
+}
+.irow:last-child { border-bottom: none; }
+.ikey { color: var(--tx2); flex: 1; }
+.ival { color: var(--tx); font-weight: 600; text-align: right; }
+
+.info-header {
+  padding: 24px 0 12px;
+  border-bottom: 1px solid var(--bd2);
+  margin-bottom: 16px;
+}
+.info-header-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--tx);
+}
+.info-header-sub {
+  font-size: 13px;
+  color: var(--tx2);
+  margin-top: 4px;
+}
+
+.module-block {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: var(--bg3);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--tx2);
+  line-height: 1.6;
+}
+.module-block b { color: var(--tx); }
+
+.info-footer {
+  padding: 20px 0;
+  font-size: 11px;
+  color: var(--tx2);
+  opacity: .6;
+}
