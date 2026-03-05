@@ -13,3 +13,11 @@
  */
 var S  = { tab: "T", th: {}, q: "" };
 var CV = "mentions";
+
+/**
+ * TF — time filter state
+ *   key  : preset key or "custom" or null (all)
+ *   from : Date | null
+ *   to   : Date | null
+ */
+var TF = { key: null, from: null, to: null };

@@ -20,6 +20,7 @@ function tTh(k) {
 /** Clear all active theme filters. */
 function cTh() {
   S.th = {};
+  rTabs();
   rBar();
   rFeed();
 }

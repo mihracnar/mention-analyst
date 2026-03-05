@@ -105,7 +105,7 @@ function _rUserList(userMap, container) {
 function rNetwork() {
   /* build userMap */
   var userMap = {};
-  D.forEach(function(t) {
+  D.filter(function(t){ return tfMatch(t); }).forEach(function(t) {
     if (!userMap[t.u]) userMap[t.u] = { nm: t.nm, P: 0, N: 0, NE: 0, total: 0 };
     userMap[t.u][t.s]++;
     userMap[t.u].total++;
@@ -113,7 +113,7 @@ function rNetwork() {
 
   /* build themeMap */
   var themeMap = {};
-  D.forEach(function(t) {
+  D.filter(function(t){ return tfMatch(t); }).forEach(function(t) {
     t.kw.split(",").forEach(function(k) {
       var kk = k.trim();
       if (!kk) return;

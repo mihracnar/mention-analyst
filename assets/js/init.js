@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
   var logoBtn = document.getElementById("logo-btn");
   if (logoBtn) logoBtn.addEventListener("click", resetToMentions);
 
+  /* time filter */
+  initTimeFilter();
+
   /* ── search input & clear button ── */
   var inp = document.getElementById("si");
   var xb  = document.getElementById("xb");
@@ -19,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
   inp.addEventListener("input", function() {
     S.q = inp.value;
     xb.style.display = inp.value ? "block" : "none";
+    rTabs();
     rFeed();
   });
 
@@ -26,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
     inp.value          = "";
     S.q                = "";
     xb.style.display   = "none";
+    rTabs();
     rFeed();
   });
 

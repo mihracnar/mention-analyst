@@ -22,7 +22,7 @@ function rStats() {
 
   /* ── keyword cloud (always full dataset) ── */
   var kwc = {};
-  D.forEach(function(t) {
+  D.filter(function(t){ return tfMatch(t); }).forEach(function(t) {
     t.kw.split(",").forEach(function(k) {
       var kk = k.trim();
       if (kk) kwc[kk] = (kwc[kk] || 0) + 1;
@@ -32,7 +32,7 @@ function rStats() {
   var mx  = kws.length ? kwc[kws[0]] : 1;
   /* ── keyword sentiment map ── */
   var kwSent = {};
-  D.forEach(function(t) {
+  D.filter(function(t){ return tfMatch(t); }).forEach(function(t) {
     t.kw.split(",").forEach(function(k) {
       var kk = k.trim();
       if (!kk) return;
@@ -78,16 +78,8 @@ function rStats() {
   });
   cloud += "</div></div>";
 
-  /* ── filter dataset for time series by date range ── */
-  var tsD = D.filter(function(t) {
-    if (!SC.from && !SC.to) return true;
-    var d = new Date(t.dt);
-    if (isNaN(d)) return true;
-    var ds = toDateStr(d);
-    if (SC.from && ds < SC.from) return false;
-    if (SC.to   && ds > SC.to)   return false;
-    return true;
-  });
+  /* ── filter dataset for time series by TF ── */
+  var tsD = D.filter(function(t) { return tfMatch(t); });
 
   /* ── daily buckets ── */
   var dayMap = {};
@@ -169,23 +161,12 @@ function rStats() {
   p.push("</svg>");
   var svgChart = p.join("");
 
-  /* ── unit buttons ── */
   var unitBtns = [["day","Gün"],["week","Hafta"],["month","Ay"]].map(function(u) {
     return '<button class="chart-unit-btn' + (SC.unit === u[0] ? " on" : "") + '" data-unit="' + u[0] + '">' + u[1] + "</button>";
   }).join("");
 
-  /* ── date range controls ── */
-  var hasFilter = SC.from || SC.to;
-  var dateCtrl = '<div class="chart-date-range">'
-    + '<input type="date" id="chart-from" value="' + (SC.from || "") + '" min="' + minStr + '" max="' + maxStr + '">'
-    + '<span class="chart-date-sep">—</span>'
-    + '<input type="date" id="chart-to"   value="' + (SC.to   || "") + '" min="' + minStr + '" max="' + maxStr + '">'
-    + (hasFilter ? '<button class="chart-reset-btn" id="chart-reset">Tümü</button>' : "")
-    + "</div>";
-
   var controls = '<div class="chart-controls">'
     + '<div class="chart-unit-btns">' + unitBtns + "</div>"
-    + dateCtrl
     + "</div>";
 
   var spanNote = days.length > 0
@@ -231,14 +212,7 @@ function rStats() {
     + "  </div>"
     + "</div>";
 
-  /* ── bind controls ── */
   document.querySelectorAll(".chart-unit-btn").forEach(function(btn) {
     btn.addEventListener("click", function() { SC.unit = this.getAttribute("data-unit"); rStats(); });
   });
-  var fi = document.getElementById("chart-from");
-  var ti = document.getElementById("chart-to");
-  var rb = document.getElementById("chart-reset");
-  if (fi) fi.addEventListener("change", function() { SC.from = this.value; rStats(); });
-  if (ti) ti.addEventListener("change", function() { SC.to   = this.value; rStats(); });
-  if (rb) rb.addEventListener("click",  function() { SC.from = ""; SC.to = ""; rStats(); });
 }

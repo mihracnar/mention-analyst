@@ -77,16 +77,10 @@ function gL() {
     var mt = at.length === 0 || at.some(function(k) {
       return t.kw.toLowerCase().indexOf(k.toLowerCase()) >= 0;
     });
-    return mq && mt;
+    return mq && mt && tfMatch(t);
   });
 }
 
-/**
- * Returns tweet counts split by sentiment,
- * respecting active theme (th) and search (q) filters
- * but ignoring the active tab so all tabs show live numbers.
- * @returns {{ T:number, P:number, N:number, NE:number }}
- */
 function counts() {
   var q  = S.q.toLowerCase().trim();
   var at = Object.keys(S.th).filter(function(k) { return S.th[k]; });
@@ -96,7 +90,7 @@ function counts() {
     var mt = at.length === 0 || at.some(function(k) {
       return t.kw.toLowerCase().indexOf(k.toLowerCase()) >= 0;
     });
-    if (mq && mt) {
+    if (mq && mt && tfMatch(t)) {
       c.T++;
       if (c[t.s] !== undefined) c[t.s]++;
     }
