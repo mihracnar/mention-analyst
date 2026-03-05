@@ -27,7 +27,8 @@ function _domColor(d) {
 function _rUserList(userMap, container) {
   var q   = NW.q.toLowerCase().trim();
   var all = Object.keys(userMap).sort(function(a, b) {
-    return userMap[b].total - userMap[a].total;
+    var key = NW.tab === "T" ? "total" : NW.tab;
+    return userMap[b][key] - userMap[a][key];
   });
 
   if (NW.tab !== "T") {
