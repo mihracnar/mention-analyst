@@ -48,14 +48,21 @@ function rTabs() {
 function rBar() {
   var bar  = document.getElementById("thbar");
   var clrW = document.getElementById("thbar-clr-wrap");
-  /* keywords from tweets matching search + time filter (tab & themes ignored) */
-  var q    = S.q.toLowerCase().trim();
+
+  /* base = tüm filtreler UYGULANMIş ama tema filtresi YOK
+     (tema pill'leri "bu filtreyle görünen tweetlerdeki temalar" olmalı) */
+  var q  = S.q.toLowerCase().trim();
   var base = D.filter(function(t) {
     var ms = S.tab === "T" || t.s === S.tab;
     var mq = !q || (t.bd + t.kw + t.nm + " @" + t.u).toLowerCase().indexOf(q) >= 0;
     return ms && mq && tfMatch(t);
   });
-  var ks   = allK(base);
+  var ks = allK(base);
+
+  /* seçili ama artık filtrede olmayan temaları temizle */
+  Object.keys(S.th).forEach(function(k) {
+    if (ks.indexOf(k) === -1) delete S.th[k];
+  });
   var at   = Object.keys(S.th).filter(function(k) { return S.th[k]; });
 
   if (!ks.length) { bar.innerHTML = ""; clrW.classList.remove("visible"); return; }
