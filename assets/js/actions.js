@@ -5,7 +5,6 @@
 /** Switch the sentiment tab and reset theme filters. */
 function sTab(k) {
   S.tab = k;
-  S.th  = {};
   rTabs();
   rBar();
   rFeed();

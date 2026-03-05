@@ -82,12 +82,25 @@ function gL() {
 }
 
 /**
- * Returns total tweet counts split by sentiment.
+ * Returns tweet counts split by sentiment,
+ * respecting active theme (th) and search (q) filters
+ * but ignoring the active tab so all tabs show live numbers.
  * @returns {{ T:number, P:number, N:number, NE:number }}
  */
 function counts() {
-  var c = { T: D.length, P: 0, N: 0, NE: 0 };
-  D.forEach(function(t) { if (c[t.s] !== undefined) c[t.s]++; });
+  var q  = S.q.toLowerCase().trim();
+  var at = Object.keys(S.th).filter(function(k) { return S.th[k]; });
+  var c  = { T: 0, P: 0, N: 0, NE: 0 };
+  D.forEach(function(t) {
+    var mq = !q || (t.bd + t.kw + t.nm + " @" + t.u).toLowerCase().indexOf(q) >= 0;
+    var mt = at.length === 0 || at.some(function(k) {
+      return t.kw.toLowerCase().indexOf(k.toLowerCase()) >= 0;
+    });
+    if (mq && mt) {
+      c.T++;
+      if (c[t.s] !== undefined) c[t.s]++;
+    }
+  });
   return c;
 }
 
