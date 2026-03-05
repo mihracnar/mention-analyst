@@ -54,11 +54,15 @@ function goKw(k) {
  * @param {string} u — username / handle (without @)
  */
 function goUser(u) {
+  S.tab = "T";
+  S.th  = {};
   goView("mentions");
   var inp = document.getElementById("si");
   inp.value = "@" + u;
   S.q = "@" + u;
   document.getElementById("xb").style.display = "block";
+  rTabs();
+  rBar();
   rFeed();
 }
 
