@@ -8,9 +8,6 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-  /* ── populate top badge ── */
-  rBadge();
-
   /* logo → reset all filters & go to mentions */
   var logoBtn = document.getElementById("logo-btn");
   if (logoBtn) logoBtn.addEventListener("click", resetToMentions);
