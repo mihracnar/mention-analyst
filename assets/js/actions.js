@@ -13,6 +13,8 @@ function sTab(k) {
 /** Toggle a single theme keyword on/off. */
 function tTh(k) {
   S.th[k] = !S.th[k];
+  if (!S.th[k]) delete S.th[k];
+  rTabs();
   rBar();
   rFeed();
 }

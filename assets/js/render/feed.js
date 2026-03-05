@@ -48,7 +48,14 @@ function rTabs() {
 function rBar() {
   var bar  = document.getElementById("thbar");
   var clrW = document.getElementById("thbar-clr-wrap");
-  var ks   = allK(pool());
+  /* keywords from tweets matching search + time filter (tab & themes ignored) */
+  var q    = S.q.toLowerCase().trim();
+  var base = D.filter(function(t) {
+    var ms = S.tab === "T" || t.s === S.tab;
+    var mq = !q || (t.bd + t.kw + t.nm + " @" + t.u).toLowerCase().indexOf(q) >= 0;
+    return ms && mq && tfMatch(t);
+  });
+  var ks   = allK(base);
   var at   = Object.keys(S.th).filter(function(k) { return S.th[k]; });
 
   if (!ks.length) { bar.innerHTML = ""; clrW.classList.remove("visible"); return; }
