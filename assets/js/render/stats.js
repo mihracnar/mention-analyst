@@ -30,12 +30,51 @@ function rStats() {
   });
   var kws = Object.keys(kwc).sort(function(a, b) { return kwc[b] - kwc[a]; });
   var mx  = kws.length ? kwc[kws[0]] : 1;
+  /* ── keyword sentiment map ── */
+  var kwSent = {};
+  D.forEach(function(t) {
+    t.kw.split(",").forEach(function(k) {
+      var kk = k.trim();
+      if (!kk) return;
+      if (!kwSent[kk]) kwSent[kk] = { P: 0, N: 0, NE: 0 };
+      kwSent[kk][t.s]++;
+    });
+  });
+
   var cloud = '<div class="kwcloud-wrap"><div class="kwcloud">';
   kws.forEach(function(k) {
     var r   = kwc[k] / mx;
     var cls = r >= .8 ? "lg" : r >= .5 ? "md" : "";
-    cloud += '<div class="kwitem ' + cls + '" data-kw="' + k + '" style="cursor:pointer">'
-      + k + ' <span style="color:var(--bl);font-size:11px">' + kwc[k] + "</span></div>";
+    var s   = kwSent[k] || { P: 0, N: 0, NE: 0 };
+    var tot = (s.P + s.N + s.NE) || 1;
+    var pp  = Math.round(s.P  / tot * 100);
+    var np  = Math.round(s.N  / tot * 100);
+    var ep  = 100 - pp - np;
+
+    /* dominant for border + text color */
+    var dom    = s.P >= s.N && s.P >= s.NE ? "P" : s.N >= s.P && s.N >= s.NE ? "N" : "NE";
+    var domCol = dom === "P" ? "var(--gr)" : dom === "N" ? "var(--rd)" : "var(--am)";
+    var domBd  = dom === "P" ? "rgba(0,186,124,.5)" : dom === "N" ? "rgba(244,33,46,.5)" : "rgba(255,173,31,.5)";
+
+    /* gradient: P(green) → N(red) → NE(amber) proportionally */
+    var bg;
+    if (pp === 100) {
+      bg = "var(--gr2)";
+    } else if (np === 100) {
+      bg = "var(--rd2)";
+    } else if (ep === 100) {
+      bg = "var(--am2)";
+    } else {
+      var g1 = pp, g2 = pp + np;
+      bg = "linear-gradient(to right,"
+        + "rgba(0,186,124,.18) 0%,rgba(0,186,124,.18) " + g1 + "%,"
+        + "rgba(244,33,46,.18) " + g1 + "%,rgba(244,33,46,.18) " + g2 + "%,"
+        + "rgba(255,173,31,.18) " + g2 + "%,rgba(255,173,31,.18) 100%)";
+    }
+
+    cloud += '<div class="kwitem ' + cls + '" data-kw="' + k + '" style="'
+      + "cursor:pointer;background:" + bg + ";border-color:" + domBd + ";color:var(--tx)" + '">'
+      + k + ' <span style="font-size:11px;color:var(--tx);opacity:.7">' + kwc[k] + "</span></div>";
   });
   cloud += "</div></div>";
 
