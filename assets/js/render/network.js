@@ -212,7 +212,13 @@ function rNetwork() {
     if (toggle) {
       var kk = toggle.getAttribute("data-theme-toggle");
       NW.openThemes[kk] = !NW.openThemes[kk];
+      var container = document.querySelector(".nw-theme-scroll");
+      var scrollTop = container ? container.scrollTop : 0;
       rNetwork();
+      requestAnimationFrame(function() {
+        var c = document.querySelector(".nw-theme-scroll");
+        if (c) c.scrollTop = scrollTop;
+      });
       return;
     }
     var el = e.target.closest("[data-user]");
