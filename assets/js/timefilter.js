@@ -99,11 +99,9 @@ function initTimeFilter() {
       var p   = presets[key];
       TF.key  = key; TF.from = p.from; TF.to = p.to;
 
-      /* highlight */
       document.querySelectorAll(".tf-preset").forEach(function(b){ b.classList.remove("on"); });
       this.classList.add("on");
 
-      /* clear custom inputs */
       document.getElementById("tf-from").value = "";
       document.getElementById("tf-to").value   = "";
       document.getElementById("tf-apply").disabled = true;
