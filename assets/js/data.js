@@ -1,119 +1,124 @@
 /* =====================================================
-   data.js — sample mention data (100 entries)
-   Platforms : X · IG · YT
-   Sentiments: P (Olumlu) · N (Olumsuz) · NE (Nötr)
+   data.js — loads D[] from Google Sheets CSV
    ===================================================== */
-var D = [
 
-  /* ── MART 2026 ───────────────────────────────────── */
-  {id:1,  pl:"X",  rt:"", dt:"Wed Mar 04 10:20:00 +0000 2026", u:"mimarlar_odasi",    nm:"Mimarlar Odası Bşk.",  bd:"Restorasyon projesinde aslına uygun olmayan malzeme kullanımı tespit ettik. Acil açıklama bekliyoruz.", lk:"https://x.com", s:"N",  kw:"restorasyon, eleştiri, malzeme"},
-  {id:2,  pl:"X",  rt:"", dt:"Wed Mar 04 09:40:00 +0000 2026", u:"arkeo_haber",       nm:"Arkeoloji Haber",      bd:"Kültürel miras alanındaki vizyoner projeleri için teşekkürler. UNESCO adaylığı yolda!", lk:"https://x.com", s:"P",  kw:"UNESCO, başarı, kültür"},
-  {id:3,  pl:"X",  rt:"Yeni Müze Projesi", dt:"Wed Mar 04 08:55:00 +0000 2026", u:"vatandas_can",      nm:"Caner Bakır",          bd:"Şehir müzesi projesi ne zaman bitecek? Kaç yıldır tabeladan öteye geçmedi.", lk:"https://x.com", s:"N",  kw:"şikayet, müze, gecikme"},
-  {id:4,  pl:"IG", rt:"Instagram Post: Antik Kent", dt:"Wed Mar 04 08:30:00 +0000 2026", u:"gezgin_ruhu",       nm:"Mert Gezgin",          bd:"Antik kentin girişindeki çevre düzenlemesi çok zayıf, her yer çöp içinde. Yakışmıyor.", lk:"https://instagram.com", s:"N",  kw:"çevre, antik kent, temizlik"},
-  {id:5,  pl:"YT", rt:"YouTube: Restorasyon Paneli", dt:"Wed Mar 04 11:00:00 +0000 2026", u:"akademik_bakis",    nm:"Doç. Dr. Kerem",       bd:"Paneldeki açıklamalar tatmin ediciydi ancak bütçe yönetimi konusunda hâlâ gri alanlar var.", lk:"https://youtube.com", s:"NE", kw:"panel, bütçe, akademi"},
-  {id:6,  pl:"X",  rt:"", dt:"Wed Mar 04 07:15:00 +0000 2026", u:"haber_anlik",       nm:"Yerel Gündem",         bd:"Bürokratımızdan flaş açıklama: 'Tarihi çarşının restorasyonuna haftaya başlıyoruz.'", lk:"https://x.com", s:"NE", kw:"haber, çarşı, restorasyon"},
-  {id:7,  pl:"X",  rt:"", dt:"Tue Mar 03 20:10:00 +0000 2026", u:"tarih_sever",       nm:"Selim Ak",             bd:"Kültürel miras sadece taş değildir, ruhudur. Bu bilinci aşılayan çalışmaları takdirle izliyorum.", lk:"https://x.com", s:"P",  kw:"kültür, destek, miras"},
-  {id:8,  pl:"IG", rt:"Instagram Reel: Restorasyon", dt:"Tue Mar 03 19:45:00 +0000 2026", u:"sanat_tarihci",     nm:"Fatma Şef",            bd:"İşçilik gerçekten muazzam. Gelecek kuşaklara bırakılacak en büyük miras bu.", lk:"https://instagram.com", s:"P",  kw:"sanat, tebrik, restorasyon"},
-  {id:9,  pl:"YT", rt:"YouTube: Tanıtım Belgeseli", dt:"Tue Mar 03 15:30:00 +0000 2026", u:"belgesel_tr",       nm:"Aslı Yılmaz",          bd:"Şehrin tarihini bu kadar güzel anlatan bir video olmamıştı. Emeği büyük.", lk:"https://youtube.com", s:"P",  kw:"belgesel, teşekkür, şehir"},
-  {id:10, pl:"X",  rt:"", dt:"Tue Mar 03 14:10:00 +0000 2026", u:"mimari_miras",      nm:"Hülya Koç",            bd:"Eleştirilere kulak verilmesi ve projenin revize edilmesi büyük bir olgunluk. Teşekkürler.", lk:"https://x.com", s:"P",  kw:"revizyon, diyalog, destek"},
-  {id:11, pl:"IG", rt:"Instagram Post", dt:"Tue Mar 03 11:05:00 +0000 2026", u:"pati_dostu",        nm:"Selin Pati",           bd:"Restorasyon alanındaki sahipsiz kediler için barınma alanı oluşturulması çok ince bir düşünce.", lk:"https://instagram.com", s:"P",  kw:"hayvan hakları, destek, sosyal"},
-  {id:12, pl:"YT", rt:"YouTube: Kazı Güncesi", dt:"Tue Mar 03 10:10:00 +0000 2026", u:"arkeo_ogrenci",     nm:"Emre Kitap",           bd:"Kazı alanına gönüllü kabul ediyor musunuz? Öğrenciler için staj imkânı var mı?", lk:"https://youtube.com", s:"NE", kw:"soru, eğitim, kazı"},
-  {id:13, pl:"X",  rt:"", dt:"Mon Mar 02 18:30:00 +0000 2026", u:"mimarlar_odasi",    nm:"Mimarlar Odası Bşk.",  bd:"Dün yaptığımız uyarıya yanıt geldi. Malzeme tedarikçisi değiştiriliyor. Olumlu adım.", lk:"https://x.com", s:"P",  kw:"restorasyon, diyalog, malzeme"},
-  {id:14, pl:"IG", rt:"Instagram Story", dt:"Mon Mar 02 12:00:00 +0000 2026", u:"ebru_art",          nm:"Ebru Sanat",           bd:"Belediyenin açtığı geleneksel el sanatları sergisi mutlaka görülmeli. İlham verici!", lk:"https://instagram.com", s:"P",  kw:"sergi, sanat, etkinlik"},
-  {id:15, pl:"YT", rt:"YouTube: Şehir Planlama", dt:"Mon Mar 02 18:20:00 +0000 2026", u:"planlama_atolyesi", nm:"Ezgi Tan",             bd:"Kültürel miras ve modern şehir planlaması dengesini nasıl kuruyorsunuz? Gerçekten zor.", lk:"https://youtube.com", s:"NE", kw:"soru, planlama, miras"},
-  {id:16, pl:"X",  rt:"Yeni Müze Projesi", dt:"Mon Mar 02 09:30:00 +0000 2026", u:"vatandas_can",      nm:"Caner Bakır",          bd:"Yeni açıklanan müze projesinin mimarisi etkileyici görünüyor, umarım bu sefer biter.", lk:"https://x.com", s:"NE", kw:"müze, mimari, şüphe"},
-  {id:17, pl:"IG", rt:"Instagram Reel", dt:"Mon Mar 02 15:45:00 +0000 2026", u:"sehir_rehberi",     nm:"Arda Y.",              bd:"Giriş ücretleri çok yüksek. Yerel halk kendi kültürel mirasını göremiyor.", lk:"https://instagram.com", s:"N",  kw:"fiyat, şikayet, erişim"},
-  {id:18, pl:"X",  rt:"", dt:"Sun Mar 01 21:00:00 +0000 2026", u:"arkeoloji_fan",     nm:"Burak Demir",          bd:"Hafta sonu tarihi suru gezdim, ışıklandırma ve tabela sistemi gerçekten çok iyi düşünülmüş.", lk:"https://x.com", s:"P",  kw:"ışıklandırma, gezinti, tebrik"},
-  {id:19, pl:"IG", rt:"Instagram Post", dt:"Sun Mar 01 15:20:00 +0000 2026", u:"kultur_elcisi",     nm:"Deniz Aydın",          bd:"Tarihi surlardaki ışıklandırma çalışması çok estetik olmuş, gece yürüyüşü keyifli.", lk:"https://instagram.com", s:"P",  kw:"ışıklandırma, teşekkür, estetik"},
-  {id:20, pl:"YT", rt:"YouTube: Kültürel Miras Raporu", dt:"Sun Mar 01 23:30:00 +0000 2026", u:"muhalif_kanal",     nm:"Yavuz Spor",           bd:"Rapor toz pembe çizilmiş ama sahada durum farklı. Tarihi evler hâlâ dökülüyor.", lk:"https://youtube.com", s:"N",  kw:"eleştiri, rapor, terk"},
-  {id:21, pl:"X",  rt:"", dt:"Sun Mar 01 07:00:00 +0000 2026", u:"kent_aktivist",     nm:"Ozan Gül",             bd:"Sokak toplanmalarına neden izin verilmiyor? Tarihi mekânlar halkın ortak alanıdır.", lk:"https://x.com", s:"N",  kw:"erişim, eleştiri, şehir"},
-  {id:22, pl:"X",  rt:"", dt:"Sat Feb 28 20:15:00 +0000 2026", u:"yerel_iz",          nm:"Zeynep Koç",           bd:"Sokak sağlıklaştırma projesinden sonra mahallenin çehresi değişti, emeği geçenlere teşekkürler.", lk:"https://x.com", s:"P",  kw:"restorasyon, teşekkür, mahalle"},
-  {id:23, pl:"IG", rt:"Instagram Story", dt:"Sat Feb 28 13:30:00 +0000 2026", u:"lifestyle_ezgi",    nm:"Ezgi Aydın",           bd:"Bugünkü tarih yürüyüşü harikaydı, her ay tekrarlanmalı!", lk:"https://instagram.com", s:"P",  kw:"etkinlik, teşekkür, yürüyüş"},
-  {id:24, pl:"YT", rt:"YouTube: Gastronomi Müzesi", dt:"Sat Feb 28 16:40:00 +0000 2026", u:"lezzet_avcisi",     nm:"Oğuz K.",              bd:"Böyle bir müze gastronomi turizmi için harika bir adım. Tebrik ediyorum.", lk:"https://youtube.com", s:"P",  kw:"müze, turizm, gastronomi"},
-  {id:25, pl:"IG", rt:"Instagram Reel", dt:"Sat Feb 28 22:10:00 +0000 2026", u:"sehir_rehberi",     nm:"Arda Y.",              bd:"Gece turlarına rehberlik ettim, ziyaretçiler çok memnun. Ama yeterli aydınlatma hâlâ yok.", lk:"https://instagram.com", s:"NE", kw:"turizm, ışıklandırma, rehber"},
-  {id:26, pl:"X",  rt:"", dt:"Sat Feb 28 11:00:00 +0000 2026", u:"tarih_sever",       nm:"Selim Ak",             bd:"Yeni arkeoloji raporu yayımlandı, bulgular son derece heyecan verici. Paylaşımları takip edin.", lk:"https://x.com", s:"P",  kw:"arkeoloji, haber, başarı"},
+var D = [];
+var DATA_LOADED = false;
 
-  /* ── ŞUBAT 2026 ──────────────────────────────────── */
-  {id:27, pl:"YT", rt:"YouTube: Müze Turu", dt:"Fri Feb 27 14:00:00 +0000 2026", u:"kultur_kanal",      nm:"Kültür TV",            bd:"Müzenin yeni bölümü gerçekten etkileyici. Koleksiyon genişliği beklentileri aştı.", lk:"https://youtube.com", s:"P",  kw:"müze, koleksiyon, tebrik"},
-  {id:28, pl:"X",  rt:"", dt:"Fri Feb 27 09:30:00 +0000 2026", u:"kent_aktivist",     nm:"Ozan Gül",             bd:"Tarihi yapıların önündeki seyyar satıcı sorunu hâlâ çözülmedi. Ne zaman el atılacak?", lk:"https://x.com", s:"N",  kw:"eleştiri, şehir, düzensizlik"},
-  {id:29, pl:"IG", rt:"Instagram Post", dt:"Fri Feb 27 17:45:00 +0000 2026", u:"fotograf_istanbul",  nm:"İstanbul Lens",        bd:"Restorasyon öncesi ve sonrası karşılaştırma fotoğrafları inanılmaz. Bravo ekibe!", lk:"https://instagram.com", s:"P",  kw:"restorasyon, fotoğraf, tebrik"},
-  {id:30, pl:"X",  rt:"", dt:"Thu Feb 26 16:20:00 +0000 2026", u:"muhalif_kanal",     nm:"Yavuz Spor",           bd:"İhale süreci şeffaf mı? Kamuoyu bu sorunun yanıtını hak ediyor.", lk:"https://x.com", s:"N",  kw:"eleştiri, ihale, şeffaflık"},
-  {id:31, pl:"YT", rt:"YouTube: Canlı Q&A", dt:"Thu Feb 26 20:00:00 +0000 2026", u:"akademik_bakis",    nm:"Doç. Dr. Kerem",       bd:"Canlı yayında soruları yanıtlamanız takdire şayan. Bütçe sorusuna verilen yanıt tatmin ediciydi.", lk:"https://youtube.com", s:"P",  kw:"panel, bütçe, şeffaflık"},
-  {id:32, pl:"IG", rt:"Instagram Post", dt:"Thu Feb 26 12:10:00 +0000 2026", u:"gezgin_ruhu",       nm:"Mert Gezgin",          bd:"Yeni açılan arkeoloji parkı harika! Çocuklar için interaktif alanlar çok düşünülmüş.", lk:"https://instagram.com", s:"P",  kw:"arkeoloji, çocuk, etkinlik"},
-  {id:33, pl:"X",  rt:"", dt:"Wed Feb 25 10:00:00 +0000 2026", u:"vatandas_can",      nm:"Caner Bakır",          bd:"Tabela ve yönlendirme sistemleri nihayet güncellendi. Uzun zamandır bekliyorduk.", lk:"https://x.com", s:"P",  kw:"altyapı, tebrik, erişim"},
-  {id:34, pl:"YT", rt:"YouTube: Belgesel 2.Bölüm", dt:"Wed Feb 25 15:00:00 +0000 2026", u:"belgesel_tr",       nm:"Aslı Yılmaz",          bd:"İkinci bölüm birinciden bile iyi. Müzik seçimi de mükemmeldi, izlemeye devam.", lk:"https://youtube.com", s:"P",  kw:"belgesel, kültür, tebrik"},
-  {id:35, pl:"IG", rt:"Instagram Story", dt:"Tue Feb 24 19:00:00 +0000 2026", u:"sanat_tarihci",     nm:"Fatma Şef",            bd:"Ahşap onarım atölyesine giriş ücretini çok yüksek bulduk. Katılım düşük kalıyor.", lk:"https://instagram.com", s:"N",  kw:"fiyat, sanat, erişim"},
-  {id:36, pl:"X",  rt:"", dt:"Tue Feb 24 11:30:00 +0000 2026", u:"arkeoloji_fan",     nm:"Burak Demir",          bd:"Yeni sergi alanı açıldı! Cumartesi günleri ücretsiz girişin devam etmesini diliyorum.", lk:"https://x.com", s:"P",  kw:"sergi, erişim, etkinlik"},
-  {id:37, pl:"YT", rt:"YouTube: Röportaj", dt:"Mon Feb 23 14:00:00 +0000 2026", u:"arkeo_ogrenci",     nm:"Emre Kitap",           bd:"Staj başvurusu yaptım, süreç yavaş ilerledi ama sonunda kabul aldım. Teşekkürler.", lk:"https://youtube.com", s:"P",  kw:"eğitim, staj, kazı"},
-  {id:38, pl:"X",  rt:"", dt:"Mon Feb 23 08:45:00 +0000 2026", u:"planlama_atolyesi", nm:"Ezgi Tan",             bd:"Yeni imar planı taslağı miras alanlarını yeterince korumuyor. Hukuki itiraz başlatıyoruz.", lk:"https://x.com", s:"N",  kw:"planlama, eleştiri, hukuk"},
-  {id:39, pl:"IG", rt:"Instagram Post", dt:"Sun Feb 22 16:30:00 +0000 2026", u:"lifestyle_ezgi",    nm:"Ezgi Aydın",           bd:"Pazar sabahı antika çarşısı gezmesi en güzel aktivite. Yeni stantlar çok renkli!", lk:"https://instagram.com", s:"P",  kw:"çarşı, etkinlik, alışveriş"},
-  {id:40, pl:"X",  rt:"", dt:"Sat Feb 21 20:00:00 +0000 2026", u:"kent_aktivist",     nm:"Ozan Gül",             bd:"Tarihi çarşı esnafı zorluklarla boğuşuyor. Destek programları şeffaf biçimde açıklanmalı.", lk:"https://x.com", s:"N",  kw:"çarşı, eleştiri, esnaf"},
-  {id:41, pl:"YT", rt:"YouTube: Kent Tarihi", dt:"Fri Feb 20 17:00:00 +0000 2026", u:"kultur_kanal",      nm:"Kültür TV",            bd:"Bu haftaki programda tarihi çarşıyı anlattık. İzleyicilerden çok olumlu dönüş aldık.", lk:"https://youtube.com", s:"P",  kw:"çarşı, belgesel, kültür"},
-  {id:42, pl:"IG", rt:"Instagram Reel", dt:"Fri Feb 20 12:30:00 +0000 2026", u:"fotograf_istanbul",  nm:"İstanbul Lens",        bd:"Kazı alanında çektiğim drone görüntüleri viral oldu. Bu çalışmalar görünür olmalı!", lk:"https://instagram.com", s:"P",  kw:"arkeoloji, kazı, medya"},
-  {id:43, pl:"X",  rt:"", dt:"Thu Feb 19 09:00:00 +0000 2026", u:"mimarlar_odasi",    nm:"Mimarlar Odası Bşk.",  bd:"Tarihi dokuyu bozan kaçak yapılaşma şikâyetleri artıyor. Denetim mekanizması güçlendirilmeli.", lk:"https://x.com", s:"N",  kw:"yapılaşma, denetim, eleştiri"},
-  {id:44, pl:"YT", rt:"YouTube: Uzman Paneli", dt:"Thu Feb 19 16:00:00 +0000 2026", u:"akademik_bakis",    nm:"Doç. Dr. Kerem",       bd:"Şehir arkeolojisi alanında Türkiye'nin öncü konuma gelmesi için daha çok yatırım şart.", lk:"https://youtube.com", s:"NE", kw:"akademi, yatırım, planlama"},
-  {id:45, pl:"IG", rt:"Instagram Post", dt:"Wed Feb 18 14:00:00 +0000 2026", u:"pati_dostu",        nm:"Selin Pati",           bd:"Tarihi parkta kedi besleme noktaları oluşturuldu. Küçük ama anlamlı bir adım.", lk:"https://instagram.com", s:"P",  kw:"hayvan hakları, park, sosyal"},
-  {id:46, pl:"X",  rt:"", dt:"Tue Feb 17 10:30:00 +0000 2026", u:"haber_anlik",       nm:"Yerel Gündem",         bd:"UNESCO ekibi yerinde inceleme yaptı. Resmi açıklama önümüzdeki ay bekleniyor.", lk:"https://x.com", s:"NE", kw:"UNESCO, haber, beklenti"},
-  {id:47, pl:"YT", rt:"YouTube: Gece Turu", dt:"Mon Feb 16 21:00:00 +0000 2026", u:"lezzet_avcisi",     nm:"Oğuz K.",              bd:"Gastronomi turu harika geçti ama mekânların internet sitelerinde eksik bilgi var.", lk:"https://youtube.com", s:"NE", kw:"turizm, gastronomi, altyapı"},
-  {id:48, pl:"X",  rt:"", dt:"Sun Feb 15 17:00:00 +0000 2026", u:"tarih_sever",       nm:"Selim Ak",             bd:"Mimari mirasın korunması söz konusu olduğunda siyasi çekişme bırakılmalı, ortak akıl şart.", lk:"https://x.com", s:"NE", kw:"miras, siyaset, diyalog"},
-  {id:49, pl:"IG", rt:"Instagram Post", dt:"Sat Feb 14 13:00:00 +0000 2026", u:"ebru_art",          nm:"Ebru Sanat",           bd:"Sevgililer Günü'nde tarihi mekân özel etkinliği müthişti. Atmosfer büyüleyiciydi.", lk:"https://instagram.com", s:"P",  kw:"etkinlik, sergi, atmosfer"},
-  {id:50, pl:"X",  rt:"", dt:"Fri Feb 13 11:00:00 +0000 2026", u:"muhalif_kanal",     nm:"Yavuz Spor",           bd:"Restorasyon maliyeti açıklanan bütçenin iki katına çıkmış. Hesap verecek kimse yok mu?", lk:"https://x.com", s:"N",  kw:"bütçe, eleştiri, şeffaflık"},
+var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR6P6W-kknhNa7CSvbRJZJMssYtw6serLjumcX-K1DQ6Pn-wr5lOuqDyzjQqQtb9Sf6W1xXcQAAK1S0/pub?gid=1495608512&single=true&output=csv";
 
-  /* ── OCAK 2026 ───────────────────────────────────── */
-  {id:51, pl:"YT", rt:"YouTube: Yıl Sonu", dt:"Fri Jan 30 15:00:00 +0000 2026", u:"belgesel_tr",       nm:"Aslı Yılmaz",          bd:"2025'te yapılan restorasyon çalışmalarını derledik. Yıl gerçekten verimli geçmiş.", lk:"https://youtube.com", s:"P",  kw:"restorasyon, değerlendirme, başarı"},
-  {id:52, pl:"X",  rt:"", dt:"Thu Jan 29 09:00:00 +0000 2026", u:"arkeoloji_fan",     nm:"Burak Demir",          bd:"Yeni kazı sezonu ne zaman başlıyor? Gönüllü olmak isteyenler için başvuru var mı?", lk:"https://x.com", s:"NE", kw:"arkeoloji, soru, kazı"},
-  {id:53, pl:"IG", rt:"Instagram Story", dt:"Wed Jan 28 20:00:00 +0000 2026", u:"kultur_elcisi",     nm:"Deniz Aydın",          bd:"Kış aylarında ziyaretçi azalmış, müzeye destek için bilet aldım. Siz de alın!", lk:"https://instagram.com", s:"P",  kw:"müze, destek, turizm"},
-  {id:54, pl:"YT", rt:"YouTube: Canlı Yayın", dt:"Tue Jan 27 18:00:00 +0000 2026", u:"arkeo_ogrenci",     nm:"Emre Kitap",           bd:"Bugün ilk kazı günümdü! Heyecan tarife sığmıyor. Ekip çok sıcak davrandı.", lk:"https://youtube.com", s:"P",  kw:"kazı, eğitim, deneyim"},
-  {id:55, pl:"X",  rt:"", dt:"Mon Jan 26 10:00:00 +0000 2026", u:"vatandas_can",      nm:"Caner Bakır",          bd:"Kültür Merkezi Cumartesi günleri neden kapalı? Çalışan vatandaşlar ne yapsın?", lk:"https://x.com", s:"N",  kw:"şikayet, erişim, saatler"},
-  {id:56, pl:"IG", rt:"Instagram Post", dt:"Sun Jan 25 14:30:00 +0000 2026", u:"fotograf_istanbul",  nm:"İstanbul Lens",        bd:"Kış ışığında tarihi yapılar bambaşka bir güzellik kazanıyor. Fotoğraf serisi yayımda.", lk:"https://instagram.com", s:"P",  kw:"fotoğraf, estetik, miras"},
-  {id:57, pl:"X",  rt:"", dt:"Sat Jan 24 16:00:00 +0000 2026", u:"planlama_atolyesi", nm:"Ezgi Tan",             bd:"Yeni metro hattı güzergâhı tarihi dokunun altından geçiyor. Risk değerlendirmesi yapıldı mı?", lk:"https://x.com", s:"N",  kw:"altyapı, planlama, risk"},
-  {id:58, pl:"YT", rt:"YouTube: Arşiv Belgesel", dt:"Fri Jan 23 13:00:00 +0000 2026", u:"kultur_kanal",      nm:"Kültür TV",            bd:"Arşiv görüntülerini bu kadar iyi derleyerek sunmak gerçekten takdire değer.", lk:"https://youtube.com", s:"P",  kw:"belgesel, arşiv, kültür"},
-  {id:59, pl:"X",  rt:"", dt:"Thu Jan 22 11:30:00 +0000 2026", u:"kent_aktivist",     nm:"Ozan Gül",             bd:"Gençlik için tarihi mekânlarda ücretsiz etkinlikler artırılmalı. Kültür herkese ait.", lk:"https://x.com", s:"NE", kw:"etkinlik, gençlik, erişim"},
-  {id:60, pl:"IG", rt:"Instagram Reel", dt:"Wed Jan 21 17:00:00 +0000 2026", u:"lifestyle_ezgi",    nm:"Ezgi Aydın",           bd:"Kış gezisinde keşfettiğim o küçük müze beni büyüledi. Adını duymadığınıza şaşırdım.", lk:"https://instagram.com", s:"P",  kw:"müze, turizm, keşif"},
-  {id:61, pl:"YT", rt:"YouTube: Tartışma", dt:"Tue Jan 20 20:00:00 +0000 2026", u:"muhalif_kanal",     nm:"Yavuz Spor",           bd:"Restorasyon firmalarının seçiminde torpil iddiası. Belgeleri yayımlıyoruz.", lk:"https://youtube.com", s:"N",  kw:"eleştiri, ihale, şeffaflık"},
-  {id:62, pl:"X",  rt:"", dt:"Mon Jan 19 09:15:00 +0000 2026", u:"mimarlar_odasi",    nm:"Mimarlar Odası Bşk.",  bd:"Tarihi yapı envanter çalışması başladı. Tüm paydaşları sürece katkı sağlamaya davet ediyoruz.", lk:"https://x.com", s:"P",  kw:"envanter, katılım, restorasyon"},
-  {id:63, pl:"IG", rt:"Instagram Post", dt:"Sun Jan 18 15:00:00 +0000 2026", u:"sanat_tarihci",     nm:"Fatma Şef",            bd:"Osmanlı dönemi duvar nakışlarının restorasyonu son derece hassas yapılmış, tebrikler.", lk:"https://instagram.com", s:"P",  kw:"restorasyon, sanat, Osmanlı"},
-  {id:64, pl:"YT", rt:"YouTube: Öğrenci Gezisi", dt:"Sat Jan 17 11:00:00 +0000 2026", u:"arkeo_ogrenci",     nm:"Emre Kitap",           bd:"Üniversite öğrencileriyle yaptığımız alan gezisi çok öğreticiydi. Tekrarlanmalı.", lk:"https://youtube.com", s:"P",  kw:"eğitim, gençlik, kazı"},
-  {id:65, pl:"X",  rt:"", dt:"Fri Jan 16 14:00:00 +0000 2026", u:"haber_anlik",       nm:"Yerel Gündem",         bd:"Kültür turizmi rakamları açıklandı: ziyaretçi sayısı yüzde 18 arttı.", lk:"https://x.com", s:"P",  kw:"turizm, başarı, haber"},
-  {id:66, pl:"IG", rt:"Instagram Post", dt:"Thu Jan 15 10:00:00 +0000 2026", u:"gezgin_ruhu",       nm:"Mert Gezgin",          bd:"Kış ayı fiyat indirimi harika! Daha önce gelemediğim mekânları sonunda gezdim.", lk:"https://instagram.com", s:"P",  kw:"fiyat, turizm, memnuniyet"},
+/**
+ * Parse raw CSV text into an array of row arrays.
+ * Handles quoted fields with commas and newlines.
+ */
+function parseCSV(text) {
+  var rows = [], row = [], field = "", inQ = false;
+  for (var i = 0; i < text.length; i++) {
+    var c = text[i];
+    if (inQ) {
+      if (c === '"' && text[i+1] === '"') { field += '"'; i++; }
+      else if (c === '"') { inQ = false; }
+      else { field += c; }
+    } else {
+      if (c === '"') { inQ = true; }
+      else if (c === ',') { row.push(field); field = ""; }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ""; }
+      else if (c === '\r') { /* skip */ }
+      else { field += c; }
+    }
+  }
+  if (field || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
 
-  /* ── ARALIK 2025 ─────────────────────────────────── */
-  {id:67, pl:"X",  rt:"", dt:"Wed Dec 31 20:00:00 +0000 2025", u:"tarih_sever",       nm:"Selim Ak",             bd:"2025'i büyük çalışmalarla kapattık. Yeni yılda daha güzel projeler bekliyoruz.", lk:"https://x.com", s:"P",  kw:"değerlendirme, miras, başarı"},
-  {id:68, pl:"YT", rt:"YouTube: Yılın En İyi", dt:"Tue Dec 30 17:00:00 +0000 2025", u:"belgesel_tr",       nm:"Aslı Yılmaz",          bd:"2025'in en iyi kültür projesini seçtik. Yorumlarınızı bekliyoruz!", lk:"https://youtube.com", s:"P",  kw:"değerlendirme, kültür, ödül"},
-  {id:69, pl:"IG", rt:"Instagram Story", dt:"Mon Dec 29 12:00:00 +0000 2025", u:"ebru_art",          nm:"Ebru Sanat",           bd:"Yıl sonu sergisi muhteşemdi. Eserlerin tanıtımına verilen özen etkileyici.", lk:"https://instagram.com", s:"P",  kw:"sergi, sanat, yılsonu"},
-  {id:70, pl:"X",  rt:"", dt:"Sun Dec 28 09:30:00 +0000 2025", u:"muhalif_kanal",     nm:"Yavuz Spor",           bd:"Yılın son gününde 3 tarihi yapı çöktü. Bakımsızlık felakete dönüşüyor.", lk:"https://x.com", s:"N",  kw:"bakımsızlık, eleştiri, acil"},
-  {id:71, pl:"YT", rt:"YouTube: Acil Durum", dt:"Sun Dec 28 14:00:00 +0000 2025", u:"akademik_bakis",    nm:"Doç. Dr. Kerem",       bd:"Çöken yapıların teknik raporu inceledim. Erken uyarı raporları görmezden gelinmiş.", lk:"https://youtube.com", s:"N",  kw:"eleştiri, rapor, güvenlik"},
-  {id:72, pl:"X",  rt:"", dt:"Sat Dec 27 16:00:00 +0000 2025", u:"mimarlar_odasi",    nm:"Mimarlar Odası Bşk.",  bd:"Dün yaşanan çöküş skandal. Denetim yetersizliği için sorumluluk hesabı soruyoruz.", lk:"https://x.com", s:"N",  kw:"denetim, eleştiri, güvenlik"},
-  {id:73, pl:"IG", rt:"Instagram Post", dt:"Fri Dec 26 11:00:00 +0000 2025", u:"fotograf_istanbul",  nm:"İstanbul Lens",        bd:"Yılbaşı ışıklarıyla tarihi meydan görsel şölen sunuyor. Kareye sığmıyor!", lk:"https://instagram.com", s:"P",  kw:"etkinlik, estetik, ışıklandırma"},
-  {id:74, pl:"X",  rt:"", dt:"Thu Dec 25 10:00:00 +0000 2025", u:"pati_dostu",        nm:"Selin Pati",           bd:"Tarihi alandaki kedi kolonileri kış için barındırıldı. Bu hassasiyete bayıldım.", lk:"https://x.com", s:"P",  kw:"hayvan hakları, kış, destek"},
-  {id:75, pl:"YT", rt:"YouTube: Kış Özel", dt:"Wed Dec 24 20:00:00 +0000 2025", u:"lezzet_avcisi",     nm:"Oğuz K.",              bd:"Kış menüsü tarihi restoranlarda başladı. Tadım turu harika geçti.", lk:"https://youtube.com", s:"P",  kw:"gastronomi, turizm, kış"},
+/**
+ * Derive platform code from tweet link.
+ * X/Twitter → "X", Instagram → "IG", YouTube → "YT"
+ */
+function _pl(link) {
+  if (!link) return "X";
+  var l = link.toLowerCase();
+  if (l.indexOf("instagram") >= 0) return "IG";
+  if (l.indexOf("youtube") >= 0 || l.indexOf("youtu.be") >= 0) return "YT";
+  return "X";
+}
 
-  /* ── KASIM 2025 ──────────────────────────────────── */
-  {id:76, pl:"X",  rt:"", dt:"Sat Nov 29 14:00:00 +0000 2025", u:"arkeoloji_fan",     nm:"Burak Demir",          bd:"Kasım kazı sezonunun kapanışı yapıldı. Bu yıl rekor sayıda eser bulundu!", lk:"https://x.com", s:"P",  kw:"arkeoloji, kazı, başarı"},
-  {id:77, pl:"IG", rt:"Instagram Post", dt:"Fri Nov 28 10:00:00 +0000 2025", u:"sanat_tarihci",     nm:"Fatma Şef",            bd:"Mozaik restorasyon ekibini ziyaret ettim. El becerisi hayran bırakıcı.", lk:"https://instagram.com", s:"P",  kw:"restorasyon, sanat, mozaik"},
-  {id:78, pl:"YT", rt:"YouTube: Konferans", dt:"Thu Nov 27 16:00:00 +0000 2025", u:"kultur_kanal",      nm:"Kültür TV",            bd:"Uluslararası miras konferansı yayını izledim. Türkiye'nin sunumu çok başarılıydı.", lk:"https://youtube.com", s:"P",  kw:"konferans, UNESCO, başarı"},
-  {id:79, pl:"X",  rt:"", dt:"Wed Nov 26 09:00:00 +0000 2025", u:"kent_aktivist",     nm:"Ozan Gül",             bd:"Tarihi alanda yeni AVM projesi onaylanmış. Bu nasıl bir koruma anlayışı?", lk:"https://x.com", s:"N",  kw:"yapılaşma, eleştiri, AVM"},
-  {id:80, pl:"IG", rt:"Instagram Reel", dt:"Tue Nov 25 18:00:00 +0000 2025", u:"gezgin_ruhu",       nm:"Mert Gezgin",          bd:"Sonbahar renkleriyle tarihi park muhteşem görünüyor. Mutlaka ziyaret edin.", lk:"https://instagram.com", s:"P",  kw:"park, estetik, turizm"},
-  {id:81, pl:"X",  rt:"", dt:"Mon Nov 24 11:00:00 +0000 2025", u:"vatandas_can",      nm:"Caner Bakır",          bd:"Otopark sorunu çözülmedi. Ziyaretçiler tarihi alana araçla ulaşmakta zorlanıyor.", lk:"https://x.com", s:"N",  kw:"şikayet, erişim, ulaşım"},
-  {id:82, pl:"YT", rt:"YouTube: Halk Röportajları", dt:"Sun Nov 23 14:00:00 +0000 2025", u:"muhalif_kanal",     nm:"Yavuz Spor",           bd:"Sokakta sordum: halk restorasyon çalışmalarından ne düşünüyor? Yanıtlar şaşırttı.", lk:"https://youtube.com", s:"NE", kw:"haber, röportaj, kamuoyu"},
-  {id:83, pl:"IG", rt:"Instagram Post", dt:"Sat Nov 22 16:00:00 +0000 2025", u:"kultur_elcisi",     nm:"Deniz Aydın",          bd:"Yeni kitapçı köşesi çok güzel olmuş. Tarihi çarşıya ruh katan bir mekan.", lk:"https://instagram.com", s:"P",  kw:"çarşı, kültür, estetik"},
-  {id:84, pl:"X",  rt:"", dt:"Fri Nov 21 10:00:00 +0000 2025", u:"haber_anlik",       nm:"Yerel Gündem",         bd:"Miras Koruma Kurulu toplantısı bugün yapıldı. Kararlar yarın açıklanacak.", lk:"https://x.com", s:"NE", kw:"kurul, haber, beklenti"},
-  {id:85, pl:"YT", rt:"YouTube: Staj Programı", dt:"Thu Nov 20 13:00:00 +0000 2025", u:"arkeo_ogrenci",     nm:"Emre Kitap",           bd:"Staj başvurusu yaptım ve kabul aldım. Süreç hızlandırılmış, teşekkürler.", lk:"https://youtube.com", s:"P",  kw:"eğitim, staj, başarı"},
+/**
+ * Map Turkish sentiment label to code.
+ * Olumlu → P, Olumsuz → N, Nötr/Notr → NE
+ */
+function _s(val) {
+  if (!val) return "NE";
+  var v = val.trim().toLowerCase();
+  if (v === "olumlu")          return "P";
+  if (v === "olumsuz")         return "N";
+  return "NE";
+}
 
-  /* ── EKİM 2025 ───────────────────────────────────── */
-  {id:86, pl:"X",  rt:"", dt:"Thu Oct 30 14:00:00 +0000 2025", u:"planlama_atolyesi", nm:"Ezgi Tan",             bd:"Tarihi doku analizi raporu yayımlandı. Bazı bölgeler acil koruma altına alınmalı.", lk:"https://x.com", s:"N",  kw:"planlama, rapor, acil"},
-  {id:87, pl:"IG", rt:"Instagram Story", dt:"Wed Oct 29 10:00:00 +0000 2025", u:"ebru_art",          nm:"Ebru Sanat",           bd:"Cumhuriyet Bayramı özel sergisi harikaydı. Tarihi fotoğraflar çok duygulandırdı.", lk:"https://instagram.com", s:"P",  kw:"sergi, bayram, duygu"},
-  {id:88, pl:"YT", rt:"YouTube: Cumhuriyet Özel", dt:"Wed Oct 29 20:00:00 +0000 2025", u:"belgesel_tr",       nm:"Aslı Yılmaz",          bd:"Bu özel yapımı tüm okulların izlemesini öneririm. Tarih eğitimine büyük katkı.", lk:"https://youtube.com", s:"P",  kw:"belgesel, eğitim, bayram"},
-  {id:89, pl:"X",  rt:"", dt:"Tue Oct 28 09:30:00 +0000 2025", u:"akademik_bakis",    nm:"Doç. Dr. Kerem",       bd:"Akademik çevrelerle yürütülen ortak projeler miras korumaya değer katıyor.", lk:"https://x.com", s:"P",  kw:"akademi, işbirliği, miras"},
-  {id:90, pl:"IG", rt:"Instagram Reel", dt:"Mon Oct 27 17:00:00 +0000 2025", u:"fotograf_istanbul",  nm:"İstanbul Lens",        bd:"Sonbahar yaprak dökümünde tarihi köprü fotoğrafları büyük ilgi gördü.", lk:"https://instagram.com", s:"P",  kw:"fotoğraf, estetik, sonbahar"},
-  {id:91, pl:"X",  rt:"", dt:"Sun Oct 26 11:00:00 +0000 2025", u:"lezzet_avcisi",     nm:"Oğuz K.",              bd:"Tarihi handa yemek festivaline katıldım. Lezzet ve atmosfer birbirini tamamladı.", lk:"https://x.com", s:"P",  kw:"gastronomi, etkinlik, han"},
-  {id:92, pl:"YT", rt:"YouTube: Turizm Analizi", dt:"Fri Oct 24 15:00:00 +0000 2025", u:"kultur_kanal",      nm:"Kültür TV",            bd:"Kültür turizmi ekonomiye ne kadar katkı sağlıyor? Rakamlar düşündürücü.", lk:"https://youtube.com", s:"NE", kw:"turizm, ekonomi, analiz"},
-  {id:93, pl:"X",  rt:"", dt:"Thu Oct 23 10:00:00 +0000 2025", u:"tarih_sever",       nm:"Selim Ak",             bd:"Arkeoloji müzesinin yeni bölümü açıldı. Koleksiyonun kalitesi gerçekten etkileyici.", lk:"https://x.com", s:"P",  kw:"müze, arkeoloji, açılış"},
-  {id:94, pl:"IG", rt:"Instagram Post", dt:"Wed Oct 22 14:00:00 +0000 2025", u:"pati_dostu",        nm:"Selin Pati",           bd:"Tarihi alan hayvan barınaklarına bağış kampanyası başlatıldı. Destekleyin!", lk:"https://instagram.com", s:"P",  kw:"hayvan hakları, kampanya, destek"},
-  {id:95, pl:"X",  rt:"", dt:"Tue Oct 21 09:00:00 +0000 2025", u:"mimarlar_odasi",    nm:"Mimarlar Odası Bşk.",  bd:"Restore edilen Arasta Çarşısı'nın mimari bütünlüğü korunmuş. Ekibe teşekkürler.", lk:"https://x.com", s:"P",  kw:"restorasyon, çarşı, tebrik"},
-  {id:96, pl:"YT", rt:"YouTube: Soru-Cevap", dt:"Mon Oct 20 18:00:00 +0000 2025", u:"arkeo_ogrenci",     nm:"Emre Kitap",           bd:"Canlı yayında öğrencilerin sorularını yanıtladınız, çok faydalıydı.", lk:"https://youtube.com", s:"P",  kw:"eğitim, gençlik, soru"},
-  {id:97, pl:"X",  rt:"", dt:"Sun Oct 19 15:00:00 +0000 2025", u:"kent_aktivist",     nm:"Ozan Gül",             bd:"Tarihi alanda düzenlenen müzik festivali kalabalığı yönlendirmede yetersiz kaldı.", lk:"https://x.com", s:"N",  kw:"etkinlik, eleştiri, organizasyon"},
-  {id:98, pl:"IG", rt:"Instagram Post", dt:"Sat Oct 18 12:00:00 +0000 2025", u:"arkeoloji_fan",     nm:"Burak Demir",          bd:"Kazıda bulunan sikke koleksiyonu basına tanıtıldı. Tarihî önem inanılmaz.", lk:"https://instagram.com", s:"P",  kw:"kazı, arkeoloji, bulgu"},
-  {id:99, pl:"X",  rt:"", dt:"Fri Oct 17 11:00:00 +0000 2025", u:"vatandas_can",      nm:"Caner Bakır",          bd:"Şehir rehber uygulaması güncellendi, artık çok daha kullanışlı. Geç oldu ama olsun.", lk:"https://x.com", s:"P",  kw:"dijital, altyapı, erişim"},
-  {id:100,pl:"YT", rt:"YouTube: Kapanış", dt:"Thu Oct 16 17:00:00 +0000 2025", u:"kultur_kanal",      nm:"Kültür TV",            bd:"Ekim ayı özel yayınlarımızı beğendiniz mi? Yorumlar bizi çok motive etti.", lk:"https://youtube.com", s:"P",  kw:"kültür, medya, teşekkür"}
-];
+/**
+ * Fetch CSV from Google Sheets, parse, populate D[].
+ * Calls callback() when done (or on error with empty D).
+ */
+function loadData(callback) {
+  fetch(SHEET_CSV_URL)
+    .then(function(r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(function(text) {
+      var rows = parseCSV(text);
+      if (rows.length < 2) { callback(); return; }
+      /* skip header row (index 0) */
+      var out = [];
+      for (var i = 1; i < rows.length; i++) {
+        var r = rows[i];
+        /* skip empty rows */
+        if (!r[0] && !r[6]) continue;
+        /*
+          A(0)=Tweet ID, B(1)=Yanıtlanan Tweet ID, C(2)=Yanıtlanan Tweet Metni
+          D(3)=Tarih,    E(4)=Kullanıcı Adı,       F(5)=Ad Soyad
+          G(6)=Tweet İçeriği, H(7)=Tweet Linki,    I(8)=Eklenme Tarihi
+          J(9)=Etiket,   K(10)=Tweet Duygusu,      L(11)=Keyword
+        */
+        out.push({
+          id:  (r[0]  || "").trim(),
+          rt:  (r[1]  || "").trim(),   /* yanıtlanan tweet id */
+          rtt: (r[2]  || "").trim(),   /* yanıtlanan tweet metni */
+          dt:  (r[3]  || "").trim(),
+          u:   (r[4]  || "").trim().replace(/^@/, ""),
+          nm:  (r[5]  || "").trim(),
+          bd:  (r[6]  || "").trim(),
+          lk:  (r[7]  || "").trim(),
+          pl:  _pl(r[7]),
+          tag: (r[9]  || "").trim(),
+          s:   _s(r[10]),
+          kw:  (r[11] || "").trim()
+        });
+      }
+      /* emoji, mention, noktalama temizlenince 5 kelime altındakileri ele */
+      function _hasEnoughWords(text) {
+        var clean = text
+          .replace(/@\w+/g, "")                          /* @mention */
+          .replace(/https?:\/\/\S+/g, "")               /* URL */
+          .replace(/[\u{1F000}-\u{1FFFF}]/gu, "")       /* emoji (geniş) */
+          .replace(/[\u2600-\u27BF]/g, "")              /* misc semboller */
+          .replace(/[#.,!?;:'"(){}\[\]\/\\|<>@~`^*%$&=+\-_]/g, " ")
+          .trim();
+        var words = clean.split(/\s+/).filter(function(w) { return w.length > 0; });
+        return words.length >= 5;
+      }
+
+      D = out.filter(function(t) {
+        return t.tag !== "Toplu Etiket" && _hasEnoughWords(t.bd);
+      }).sort(function(a, b) {
+        return new Date(b.dt) - new Date(a.dt);
+      });
+      DATA_LOADED = true;
+      callback();
+    })
+    .catch(function(err) {
+      console.error("Veri yüklenemedi:", err);
+      DATA_LOADED = false;
+      callback();
+    });
+}

@@ -35,9 +35,19 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   /* ── initial render ── */
-  rTabs();
-  rBar();
-  rFeed();
+  document.getElementById("feed").innerHTML =
+    '<div style="text-align:center;padding:48px 0;color:var(--tx2);font-size:13px">Veriler yükleniyor…</div>';
+
+  loadData(function() {
+    if (!DATA_LOADED || D.length === 0) {
+      document.getElementById("feed").innerHTML =
+        '<div style="text-align:center;padding:48px 0;color:var(--rd);font-size:13px">Veriler yüklenemedi. Sayfayı yenileyin.</div>';
+      return;
+    }
+    rTabs();
+    rBar();
+    rFeed();
+  });
 
   /* ── global event delegation ──
      All interactive dynamic elements use data-* attributes so

@@ -102,9 +102,12 @@ function rFeed() {
       return '<span class="ktag' + (S.th[ck] ? " hl" : "") + '" data-kw="' + ck + '" style="cursor:pointer">' + ck + "</span>";
     }).join("");
 
-    var rep = t.rt
-      ? '<div class="trep"><small style="color:var(--bl);font-weight:700;margin-right:5px">'
-        + t.pl + ":</small> " + t.rt + "</div>"
+    var rep = (t.rt || t.rtt)
+      ? '<div class="trep">'
+        + (t.rtt
+          ? '<span class="trep-text">' + t.rtt.slice(0, 120) + (t.rtt.length > 120 ? '…' : '') + '</span>'
+          : '<span class="trep-id">Tweet #' + t.rt + '</span>')
+        + '</div>'
       : "";
 
     out += '<div class="tcard" style="animation-delay:' + (i * 0.04) + 's">'

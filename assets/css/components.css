@@ -240,14 +240,23 @@
 .trep {
   background: var(--bg2);
   border: 1px solid var(--bd);
-  border-radius: 14px;
-  padding: 10px 14px;
-  font-size: 13px;
+  border-left: 3px solid var(--bl);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 12px;
   color: var(--tx2);
   margin-bottom: 8px;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  line-height: 1.5;
+}
+.trep-text {
+  color: var(--tx2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.trep-id {
+  color: var(--tx2);
+  font-size: 11px;
+  font-style: italic;
 }
 .tbody {
   font-size: 15px;
