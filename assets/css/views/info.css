@@ -13,6 +13,7 @@
   font-weight: 700;
   color: var(--tx);
   margin-bottom: 12px;
+  text-align: center;
 }
 .irow {
   display: flex;
@@ -30,6 +31,7 @@
   padding: 24px 0 12px;
   border-bottom: 1px solid var(--bd2);
   margin-bottom: 16px;
+  text-align: center;
 }
 .info-header-title {
   font-size: 22px;
@@ -58,4 +60,5 @@
   font-size: 11px;
   color: var(--tx2);
   opacity: .6;
+  text-align: center;
 }

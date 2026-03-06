@@ -79,6 +79,7 @@ body {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--bd);
   margin-bottom: 4px;
+  text-align: center;
 }
 
 /* ── section wrappers ── */
