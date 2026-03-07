@@ -54,7 +54,7 @@ function loadOzet(callback) {
       console.error("Özet yüklenemedi:", err);
       _ozetData   = {};
       _ozetLoaded = true;
-      var el = document.getElementById("main");
+      var el = document.getElementById("ozet-c");
       if (el) el.innerHTML = '<div class="oview"><div class="ozet-empty" style="color:var(--rd)">Veri yüklenemedi: ' + err.message + '</div></div>';
       callback({});
     });
@@ -92,14 +92,14 @@ function _hedefPeriyot(data) {
 
 /* ── Ana render ── */
 function rOzet() {
-  var el = document.getElementById("main");
+  var el = document.getElementById("ozet-c");
   if (!el) return;
   el.innerHTML = '<div class="oview"><div class="ozet-loading">Yükleniyor\u2026</div></div>';
   loadOzet(function(data) { _rOzetIcerik(data); });
 }
 
 function _rOzetIcerik(data) {
-  var el = document.getElementById("main");
+  var el = document.getElementById("ozet-c");
   if (!el) return;
   var hedef = _hedefPeriyot(data);
   var cards = hedef ? (data[hedef] || []) : [];
