@@ -81,5 +81,11 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       return;
     }
+
+    /* özet period seçici */
+    if ((el = e.target.closest("[data-ozet-p]"))) {
+      setOzetPeriod(el.getAttribute("data-ozet-p"));
+      return;
+    }
   });
 });

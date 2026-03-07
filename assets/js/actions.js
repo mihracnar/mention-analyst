@@ -83,6 +83,7 @@ function goView(v) {
   if (v === "stats")   rStats();
   if (v === "network") rNetwork();
   if (v === "info")    rInfo();
+  if (v === "ozet")    rOzet();
 }
 
 /** Reset all filters and jump to Mentions at the top. Bound to the logo. */

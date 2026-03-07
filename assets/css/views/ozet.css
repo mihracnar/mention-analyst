@@ -1,0 +1,125 @@
+/* ── Özet view ── */
+.oview {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* period selector */
+.period-row {
+  display: flex;
+  gap: 6px;
+}
+.period-btn {
+  flex: 1;
+  padding: 8px 0;
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tx2);
+  cursor: pointer;
+  font-family: var(--fn);
+  transition: all .15s;
+  text-align: center;
+}
+.period-btn:hover { border-color: var(--bl); color: var(--bl); }
+.period-btn.on    { border-color: var(--bl); background: var(--bl2); color: var(--bl); }
+
+/* insight card */
+.icard {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  animation: fadeUp .3s ease both;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.icard::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 14px 0 0 14px;
+}
+.icard.trend    ::before { background: var(--bl); }
+.icard.positive::before  { background: var(--gr); }
+.icard.negative::before  { background: var(--rd); }
+.icard.warning::before   { background: var(--am); }
+.icard.neutral::before   { background: var(--tx2); }
+
+.icard-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.icard.trend    .icard-icon { background: var(--bl2); }
+.icard.positive .icard-icon { background: var(--gr2); }
+.icard.negative .icard-icon { background: var(--rd2); }
+.icard.warning  .icard-icon { background: var(--am2); }
+.icard.neutral  .icard-icon { background: rgba(113,118,123,.12); }
+
+.icard-body { flex: 1; min-width: 0; }
+
+.icard-cat {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.icard.trend    .icard-cat { color: var(--bl); }
+.icard.positive .icard-cat { color: var(--gr); }
+.icard.negative .icard-cat { color: var(--rd); }
+.icard.warning  .icard-cat { color: var(--am); }
+.icard.neutral  .icard-cat { color: var(--tx2); }
+
+.icard-text {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--tx);
+  font-weight: 500;
+}
+
+.icard-stat {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.stat-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--bg3);
+  color: var(--tx2);
+}
+.stat-pill.up   { color: var(--gr); background: var(--gr2); }
+.stat-pill.down { color: var(--rd); background: var(--rd2); }
+.stat-pill.warn { color: var(--am); background: var(--am2); }
+.stat-pill.info { color: var(--bl); background: var(--bl2); }
+
+/* empty / loading */
+.ozet-empty, .ozet-loading {
+  text-align: center;
+  padding: 48px 0;
+  color: var(--tx2);
+  font-size: 13px;
+  line-height: 1.8;
+}
