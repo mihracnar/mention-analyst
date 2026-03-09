@@ -13,7 +13,7 @@
    - Aylık  : "Şubat 2026"
    ===================================================== */
 
-var OZET_CSV_URL = "OZET_CSV_URL_BURAYA";
+var OZET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR6P6W-kknhNa7CSvbRJZJMssYtw6serLjumcX-K1DQ6Pn-wr5lOuqDyzjQqQtb9Sf6W1xXcQAAK1S0/pub?gid=1912575484&single=true&output=csv";
 
 var _ozetData   = null;
 var _ozetLoaded = false;
@@ -47,7 +47,6 @@ function loadOzet(callback) {
       }
       _ozetData   = grouped;
       _ozetLoaded = true;
-      console.log("Özet yüklendi:", Object.keys(grouped).length, "periyot", Object.keys(grouped));
       callback(_ozetData);
     })
     .catch(function(err) {
@@ -81,12 +80,23 @@ function _hedefPeriyot(data) {
   ayliklar.sort(function(a,b)   { return _aylikSira(b) - _aylikSira(a); });
 
   /* -1 mantığı */
-  if (!key || key === "today" || key === "custom") return gunlukler[0] ? gunlukler[0].str : null;
+  if (!key || key === "today") return gunlukler[0] ? gunlukler[0].str : null;
   if (key === "yesterday")  return gunlukler[1] ? gunlukler[1].str : (gunlukler[0] ? gunlukler[0].str : null);
   if (key === "week")       return haftaliklar[0] || null;
   if (key === "lastweek")   return haftaliklar[1] || haftaliklar[0] || null;
   if (key === "month")      return ayliklar[0] || null;
   if (key === "lastmonth")  return ayliklar[1] || ayliklar[0] || null;
+  if (key === "custom") {
+    /* TF.from varsa o tarihe en yakın günlük özeti bul */
+    if (TF.from && gunlukler.length) {
+      var target = TF.from.getTime();
+      var closest = gunlukler.reduce(function(a, b) {
+        return Math.abs(b.date - target) < Math.abs(a.date - target) ? b : a;
+      });
+      return closest.str;
+    }
+    return gunlukler[0] ? gunlukler[0].str : null;
+  }
   return gunlukler[0] ? gunlukler[0].str : null;
 }
 
@@ -94,7 +104,7 @@ function _hedefPeriyot(data) {
 function rOzet() {
   var el = document.getElementById("ozet-c");
   if (!el) return;
-  el.innerHTML = '<div class="oview"><div class="ozet-loading">Yükleniyor\u2026</div></div>';
+  el.innerHTML = '<div class="oview"><div class="ozet-loading">Yükleniyor…</div></div>';
   loadOzet(function(data) { _rOzetIcerik(data); });
 }
 
@@ -112,10 +122,11 @@ function _rOzetIcerik(data) {
     return;
   }
 
-  el.innerHTML = '<div class="oview">' + periodHTML
+  var html = '<div class="oview">' + periodHTML
     + '<div class="ozet-period-lbl">' + (hedef || "") + '</div>'
     + cards.map(function(c, i) { return _cardHTML(c, i); }).join("")
     + '</div>';
+  el.innerHTML = html;
 }
 
 /* ── Period row ── */
@@ -175,8 +186,47 @@ function _cardHTML(c, idx) {
   if (c.deger)   stats.push({ lbl: c.deger,   cls: _statCls(c.deger) });
   if (c.degisim) stats.push({ lbl: c.degisim, cls: _deltaCls(c.degisim) });
   if (c.detay)   stats.push({ lbl: c.detay,   cls: "" });
-  var statHTML = stats.map(function(s) {
-    return '<span class="stat-pill ' + s.cls + '">' + s.lbl + '</span>';
+
+  var statHTML = stats.map(function(s, si) {
+    var lbl = s.lbl;
+
+    /* @kullanıcı — birden fazla olabilir, hepsini ayrı pill yap */
+    if (lbl.indexOf("@") >= 0) {
+      /* "@user1, @user2 +N diğer" formatını parse et */
+      var parts = lbl.split(/[,،]\s*/);
+      var pills = parts.map(function(p) {
+        p = p.trim();
+        if (p.charAt(0) === "@") {
+          /* "+N diğer" gibi suffix'i ayır */
+          var m = p.match(/^(@\S+)(.*)/);
+          if (m) {
+            var handle = m[1].replace(/^@/, "");
+            var suffix = m[2].trim();
+            var pill = '<span class="stat-pill ' + s.cls + ' ozet-link" data-ozet-user="' + handle + '" style="cursor:pointer">' + m[1] + '</span>';
+            return suffix ? pill + ' <span class="stat-pill">' + suffix + '</span>' : pill;
+          }
+        }
+        /* "+N diğer" gibi etiket değilse düz pill */
+        return '<span class="stat-pill ' + s.cls + '">' + p + '</span>';
+      }).join(" ");
+      return pills;
+    }
+    /* Olumlu → sentiment P */
+    if (lbl.indexOf("Olumlu") >= 0) {
+      return '<span class="stat-pill ' + s.cls + ' ozet-link" data-ozet-sent="P" style="cursor:pointer">' + lbl + '</span>';
+    }
+    /* Olumsuz → sentiment N */
+    if (lbl.indexOf("Olumsuz") >= 0) {
+      return '<span class="stat-pill ' + s.cls + ' ozet-link" data-ozet-sent="N" style="cursor:pointer">' + lbl + '</span>';
+    }
+    /* Tema kategorilerinde ilk stat (deger) → keyword */
+    var temaKats = ["Baskın Tema", "Yeni Gündem", "Hızlı Yükselen"];
+    if (si === 0 && temaKats.indexOf(c.kat) >= 0) {
+      var kw = lbl.replace(/^["""«]|["""»]$/g, "").trim();
+      return '<span class="stat-pill ' + s.cls + ' ozet-link" data-ozet-kw="' + kw + '" style="cursor:pointer">' + lbl + '</span>';
+    }
+
+    return '<span class="stat-pill ' + s.cls + '">' + lbl + '</span>';
   }).join("");
 
   return '<div class="icard ' + type + '" style="animation-delay:' + (idx * 0.07) + 's">'

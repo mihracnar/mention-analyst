@@ -74,10 +74,12 @@ function goUser(u) {
  */
 function goView(v) {
   CV = v;
-  var names = ["mentions", "stats", "network", "info"];
+  var names = ["mentions", "stats", "network", "info", "ozet"];
   names.forEach(function(n) {
-    document.getElementById("view-" + n).classList.toggle("on", n === v);
-    document.getElementById("nav-" + n).classList.toggle("on",  n === v);
+    var ve = document.getElementById("view-" + n);
+    var ne = document.getElementById("nav-" + n);
+    if (ve) ve.classList.toggle("on", n === v);
+    if (ne) ne.classList.toggle("on",  n === v);
   });
   if (v !== "mentions") window.scrollTo(0, 0);
   if (v === "stats")   rStats();

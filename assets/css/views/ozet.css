@@ -7,11 +7,11 @@
 }
 
 /* period selector */
-.period-row {
+.oview .period-row {
   display: flex;
   gap: 6px;
 }
-.period-btn {
+.oview .period-btn {
   flex: 1;
   padding: 8px 0;
   background: var(--bg2);
@@ -25,11 +25,11 @@
   transition: all .15s;
   text-align: center;
 }
-.period-btn:hover { border-color: var(--bl); color: var(--bl); }
-.period-btn.on    { border-color: var(--bl); background: var(--bl2); color: var(--bl); }
+.oview .period-btn:hover { border-color: var(--bl); color: var(--bl); }
+.oview .period-btn.on    { border-color: var(--bl); background: var(--bl2); color: var(--bl); }
 
 /* insight card */
-.icard {
+.oview .icard {
   background: var(--bg2);
   border: 1px solid var(--bd);
   border-radius: 14px;
@@ -45,20 +45,20 @@
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.icard::before {
+.oview .icard::before {
   content: '';
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 3px;
   border-radius: 14px 0 0 14px;
 }
-.icard.trend    ::before { background: var(--bl); }
-.icard.positive::before  { background: var(--gr); }
-.icard.negative::before  { background: var(--rd); }
-.icard.warning::before   { background: var(--am); }
-.icard.neutral::before   { background: var(--tx2); }
+.oview .icard.trend    ::before { background: var(--bl); }
+.oview .icard.positive::before  { background: var(--gr); }
+.oview .icard.negative::before  { background: var(--rd); }
+.oview .icard.warning::before   { background: var(--am); }
+.oview .icard.neutral::before   { background: var(--tx2); }
 
-.icard-icon {
+.oview .icard-icon {
   width: 36px;
   height: 36px;
   border-radius: 10px;
@@ -68,41 +68,41 @@
   font-size: 17px;
   flex-shrink: 0;
 }
-.icard.trend    .icard-icon { background: var(--bl2); }
-.icard.positive .icard-icon { background: var(--gr2); }
-.icard.negative .icard-icon { background: var(--rd2); }
-.icard.warning  .icard-icon { background: var(--am2); }
-.icard.neutral  .icard-icon { background: rgba(113,118,123,.12); }
+.oview .icard.trend    .icard-icon { background: var(--bl2); }
+.oview .icard.positive .icard-icon { background: var(--gr2); }
+.oview .icard.negative .icard-icon { background: var(--rd2); }
+.oview .icard.warning  .icard-icon { background: var(--am2); }
+.oview .icard.neutral  .icard-icon { background: rgba(113,118,123,.12); }
 
-.icard-body { flex: 1; min-width: 0; }
+.oview .icard-body { flex: 1; min-width: 0; }
 
-.icard-cat {
+.oview .icard-cat {
   font-size: 9px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 4px;
 }
-.icard.trend    .icard-cat { color: var(--bl); }
-.icard.positive .icard-cat { color: var(--gr); }
-.icard.negative .icard-cat { color: var(--rd); }
-.icard.warning  .icard-cat { color: var(--am); }
-.icard.neutral  .icard-cat { color: var(--tx2); }
+.oview .icard.trend    .icard-cat { color: var(--bl); }
+.oview .icard.positive .icard-cat { color: var(--gr); }
+.oview .icard.negative .icard-cat { color: var(--rd); }
+.oview .icard.warning  .icard-cat { color: var(--am); }
+.oview .icard.neutral  .icard-cat { color: var(--tx2); }
 
-.icard-text {
+.oview .icard-text {
   font-size: 13px;
   line-height: 1.55;
   color: var(--tx);
   font-weight: 500;
 }
 
-.icard-stat {
+.oview .icard-stat {
   margin-top: 8px;
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
 }
-.stat-pill {
+.oview .stat-pill {
   font-size: 10px;
   font-weight: 700;
   padding: 2px 8px;
@@ -110,13 +110,16 @@
   background: var(--bg3);
   color: var(--tx2);
 }
-.stat-pill.up   { color: var(--gr); background: var(--gr2); }
-.stat-pill.down { color: var(--rd); background: var(--rd2); }
-.stat-pill.warn { color: var(--am); background: var(--am2); }
-.stat-pill.info { color: var(--bl); background: var(--bl2); }
+.oview .stat-pill.up   { color: var(--gr); background: var(--gr2); }
+.oview .stat-pill.down { color: var(--rd); background: var(--rd2); }
+.oview .stat-pill.warn { color: var(--am); background: var(--am2); }
+.oview .stat-pill.info { color: var(--bl); background: var(--bl2); }
 
 /* empty / loading */
-.ozet-empty, .ozet-loading {
+.oview .stat-pill.ozet-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
   text-align: center;
   padding: 48px 0;
   color: var(--tx2);

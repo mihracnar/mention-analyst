@@ -87,5 +87,19 @@ document.addEventListener("DOMContentLoaded", function() {
       setOzetPeriod(el.getAttribute("data-ozet-p"));
       return;
     }
+
+    /* özet kart linkleri */
+    if ((el = e.target.closest("[data-ozet-user]"))) {
+      goUser(el.getAttribute("data-ozet-user"));
+      return;
+    }
+    if ((el = e.target.closest("[data-ozet-sent]"))) {
+      goSent(el.getAttribute("data-ozet-sent"));
+      return;
+    }
+    if ((el = e.target.closest("[data-ozet-kw]"))) {
+      goKw(el.getAttribute("data-ozet-kw"));
+      return;
+    }
   });
 });
