@@ -120,6 +120,8 @@
   opacity: 0.75;
   text-decoration: underline;
 }
+
+.empty-state { /* <--- You were missing this line! */
   text-align: center;
   padding: 48px 0;
   color: var(--tx2);
