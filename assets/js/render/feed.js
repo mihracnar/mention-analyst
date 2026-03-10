@@ -68,8 +68,22 @@ function rBar() {
   if (!ks.length) { bar.innerHTML = ""; clrW.classList.remove("visible"); return; }
 
   var h = '<span class="thlbl">Tema</span>';
+  /* max sayıyı bul */
+  var kwCounts = {};
+  base.forEach(function(t) {
+    t.kw.split(",").forEach(function(k) {
+      var kk = k.trim().toLocaleLowerCase("tr");
+      if (kk) kwCounts[kk] = (kwCounts[kk] || 0) + 1;
+    });
+  });
+  var maxCnt = Math.max.apply(null, ks.map(function(k) { return kwCounts[k] || 1; }));
   ks.forEach(function(k) {
-    h += '<div class="thpill' + (S.th[k] ? " on" : "") + '" data-th="' + k + '">' + k + "</div>";
+    var cnt   = kwCounts[k] || 1;
+    var ratio = maxCnt > 1 ? (cnt - 1) / (maxCnt - 1) : 0;
+    /* 0.06 → 0.28 arası opaklık: az kullanılan soluk, çok kullanılan belirgin */
+    var alpha = (0.08 + ratio * 0.22).toFixed(3);
+    var style = 'style="background:rgba(180,20,60,' + alpha + ');border-color:rgba(180,20,60,' + (0.20 + ratio * 0.55).toFixed(2) + ')"';
+    h += '<div class="thpill' + (S.th[k] ? " on" : "") + '" data-th="' + k + '" ' + style + '>' + proper(k) + "</div>";
   });
   bar.innerHTML = h;
   clrW.classList.toggle("visible", at.length > 0);
@@ -99,7 +113,7 @@ function rFeed() {
 
     var kts = t.kw.split(",").map(function(k) {
       var ck = k.trim();
-      return '<span class="ktag' + (S.th[ck] ? " hl" : "") + '" data-kw="' + ck + '" style="cursor:pointer">' + ck + "</span>";
+      return '<span class="ktag' + (S.th[ck] ? " hl" : "") + '" data-kw="' + ck + '" style="cursor:pointer">' + proper(ck) + "</span>";
     }).join("");
 
     var rep = (t.rt || t.rtt)

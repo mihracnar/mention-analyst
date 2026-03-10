@@ -17,7 +17,7 @@
   margin: 0 4px 8px 0;
 }
 .nw-stab:hover { border-color: var(--bl); color: var(--bl); background: var(--bl2); }
-.nw-stab.on    { font-weight: 700; }
+.nw-stab.on    { border-color: var(--bl); color: var(--bl); background: var(--bl2); font-weight: 700; }
 
 /* ── SEARCH ────────────────────────────────────────── */
 .nw-search-wrap {
@@ -34,7 +34,7 @@
 }
 .nw-search {
   width: 100%;
-  background: #202327;
+  background: var(--bg3);
   border: 1px solid transparent;
   border-radius: 9999px;
   padding: 8px 34px 8px 36px;

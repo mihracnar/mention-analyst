@@ -55,28 +55,42 @@ function pool() {
  * @returns {string[]}
  */
 function allK(p) {
-  var seen = {}, result = [];
+  var counts = {};
   p.forEach(function(t) {
     t.kw.split(",").forEach(function(k) {
-      var kk = k.trim();
-      if (kk && !seen[kk]) { seen[kk] = true; result.push(kk); }
+      var kk = k.trim().toLocaleLowerCase("tr");
+      if (kk) counts[kk] = (counts[kk] || 0) + 1;
     });
   });
-  return result.sort();
+  return Object.keys(counts).sort(function(a, b) {
+    var diff = counts[b] - counts[a];
+    return diff !== 0 ? diff : a.localeCompare(b, "tr");
+  });
+}
+
+/* İlk harfi büyük, geri kalanı küçük (Türkçe uyumlu) */
+function proper(s) {
+  if (!s) return s;
+  return s.charAt(0).toLocaleUpperCase("tr") + s.slice(1).toLocaleLowerCase("tr");
 }
 
 /**
  * Returns tweets that pass the current state filters (tab + themes + search).
  * @returns {Array}
  */
+function _kwMatch(kwStr, k) {
+  var needle = k.toLocaleLowerCase("tr");
+  return kwStr.split(",").some(function(w) {
+    return w.trim().toLocaleLowerCase("tr") === needle;
+  });
+}
+
 function gL() {
   var q  = S.q.toLowerCase().trim();
   var at = Object.keys(S.th).filter(function(k) { return S.th[k]; });
   return pool().filter(function(t) {
     var mq = !q || (t.bd + t.kw + t.nm + " @" + t.u).toLowerCase().indexOf(q) >= 0;
-    var mt = at.length === 0 || at.some(function(k) {
-      return t.kw.toLowerCase().indexOf(k.toLowerCase()) >= 0;
-    });
+    var mt = at.length === 0 || at.some(function(k) { return _kwMatch(t.kw, k); });
     return mq && mt && tfMatch(t);
   });
 }
@@ -87,9 +101,7 @@ function counts() {
   var c  = { T: 0, P: 0, N: 0, NE: 0 };
   D.forEach(function(t) {
     var mq = !q || (t.bd + t.kw + t.nm + " @" + t.u).toLowerCase().indexOf(q) >= 0;
-    var mt = at.length === 0 || at.some(function(k) {
-      return t.kw.toLowerCase().indexOf(k.toLowerCase()) >= 0;
-    });
+    var mt = at.length === 0 || at.some(function(k) { return _kwMatch(t.kw, k); });
     if (mq && mt && tfMatch(t)) {
       c.T++;
       if (c[t.s] !== undefined) c[t.s]++;

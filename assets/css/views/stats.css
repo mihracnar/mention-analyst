@@ -104,7 +104,7 @@
   flex-wrap: wrap;
 }
 .chart-date-range input[type="date"] {
-  background: #202327;
+  background: var(--bg3);
   border: 1px solid var(--bd);
   border-radius: 8px;
   color: var(--tx);
@@ -122,7 +122,7 @@
   padding: 4px 10px;
   border-radius: 9999px;
   border: 1px solid rgba(244,33,46,.4);
-  background: rgba(244,33,46,.08);
+  background: var(--rd2);
   color: var(--rd);
   font-size: 12px;
   font-weight: 600;

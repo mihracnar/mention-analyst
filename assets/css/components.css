@@ -68,7 +68,7 @@
 }
 .sinput {
   width: 100%;
-  background: #202327;
+  background: var(--bg3);
   border: 1px solid transparent;
   border-radius: 9999px;
   padding: 10px 36px 10px 42px;
@@ -139,8 +139,8 @@
   transition: all .15s;
   white-space: nowrap;
 }
-.thpill:hover { border-color: var(--bl); color: var(--bl); background: var(--bl2); }
-.thpill.on    { border-color: var(--bl); color: var(--bl); background: var(--bl2); }
+.thpill:hover { border-color: var(--bl); color: var(--bl); background: var(--bl2) !important; }
+.thpill.on    { border-color: var(--bl) !important; color: var(--bl) !important; background: rgba(29,155,240,0.28) !important; }
 
 /* sticky clear button */
 .thbar-clr-wrap {
@@ -159,7 +159,7 @@
   padding: 5px 12px;
   border-radius: 9999px;
   border: 1px solid rgba(244,33,46,.45);
-  background: rgba(244,33,46,.08);
+  background: var(--rd2);
   color: var(--rd);
   font-size: 12px;
   font-weight: 600;
