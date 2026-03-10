@@ -102,4 +102,11 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
   });
+
+  /* Desktop: tf-bar'ı sidebar slotuna taşı */
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    var tfBar  = document.querySelector(".tf-bar");
+    var tfSlot = document.getElementById("bnav-tf-slot");
+    if (tfBar && tfSlot) tfSlot.appendChild(tfBar);
+  }
 });

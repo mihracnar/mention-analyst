@@ -116,7 +116,7 @@ function rFeed() {
       return '<span class="ktag' + (S.th[ck] ? " hl" : "") + '" data-kw="' + ck + '" style="cursor:pointer">' + proper(ck) + "</span>";
     }).join("");
 
-    var rep = (t.rt || t.rtt)
+    var rep = t.rtt
       ? '<div class="trep">'
         + (t.rtt
           ? '<span class="trep-text">' + t.rtt.slice(0, 120) + (t.rtt.length > 120 ? '…' : '') + '</span>'
