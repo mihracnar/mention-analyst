@@ -105,7 +105,7 @@ function loadData(callback) {
           .replace(/[#.,!?;:'"(){}\[\]\/\\|<>@~`^*%$&=+\-_]/g, " ")
           .trim();
         var words = clean.split(/\s+/).filter(function(w) { return w.length > 0; });
-        return words.length >= 5;
+        return words.length >= 3;
       }
 
       D = out.filter(function(t) {
