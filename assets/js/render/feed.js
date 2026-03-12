@@ -126,7 +126,6 @@ function rFeed() {
           + '<span class="trep-date">' + fd(repTweet.dt) + '</span>'
         : '';
       rep = '<div class="trep" data-expanded="0">'
-        + '<span class="trep-label">↩ Yanıtlanan tweet</span>'
         + (hasMore
           ? '<div class="trep-short">' + t.rtt.slice(0, 120) + '…</div>'
             + '<div class="trep-full" style="display:none">'

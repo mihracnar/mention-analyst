@@ -230,15 +230,16 @@
   flex-shrink: 0;
 }
 .trep {
-  background: var(--bg2);
-  border: 1px solid var(--bd);
-  border-left: 3px solid var(--bl);
-  border-radius: 10px;
-  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid var(--bd);
+  border-radius: 0;
+  padding: 6px 0 6px 10px;
   font-size: 12px;
   color: var(--tx2);
   margin-bottom: 8px;
   line-height: 1.5;
+  font-style: italic;
 }
 .trep-meta {
   display: flex;
@@ -258,6 +259,7 @@
 }
 .trep-label {
   display: block;
+  font-style: normal;
   font-size: 10px;
   font-weight: 700;
   color: var(--bl);
@@ -273,6 +275,7 @@
   margin-top: 6px;
   font-size: 11px;
   font-weight: 600;
+  font-style: normal;
   color: var(--bl);
   background: none;
   border: none;
