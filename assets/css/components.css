@@ -179,7 +179,6 @@
   min-height: 22px;
 }
 
-/* ── TWEET CARD ───────────────────────────────────── */
 .tcard {
   display: flex;
   gap: 12px;
@@ -215,13 +214,6 @@
   color: #fff;
   flex-shrink: 0;
 }
-.tline {
-  flex: 1;
-  width: 2px;
-  background: var(--bd);
-  min-height: 8px;
-  border-radius: 1px;
-}
 .tright  { flex: 1; min-width: 0; }
 .thead   { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; flex-wrap: wrap; }
 .tnm     { font-size: 15px; font-weight: 700; color: var(--tx); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -248,16 +240,47 @@
   margin-bottom: 8px;
   line-height: 1.5;
 }
-.trep-text {
-  color: var(--tx2);
-  font-size: 12px;
-  line-height: 1.5;
+.trep-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
 }
-.trep-id {
-  color: var(--tx2);
+.trep-user {
   font-size: 11px;
-  font-style: italic;
+  font-weight: 700;
+  color: var(--bl);
 }
+.trep-date {
+  font-size: 11px;
+  color: var(--tx2);
+  opacity: .7;
+}
+.trep-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--bl);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 4px;
+  opacity: .8;
+}
+.trep-text  { color: var(--tx2); font-size: 12px; line-height: 1.5; }
+.trep-full  { color: var(--tx2); font-size: 12px; line-height: 1.5; margin-top: 4px; }
+.trep-toggle {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bl);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--fn);
+}
+.trep-toggle:hover { text-decoration: underline; }
 .tbody {
   font-size: 15px;
   line-height: 1.65;

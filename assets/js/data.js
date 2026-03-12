@@ -109,7 +109,7 @@ function loadData(callback) {
       }
 
       D = out.filter(function(t) {
-        return t.tag !== "Toplu Etiket" && t.tag !== "Reklam" && _hasEnoughWords(t.bd);
+        return t.tag !== "Toplu Etiket" && t.tag !== "Reklam" && t.kw && _hasEnoughWords(t.bd);
       }).sort(function(a, b) {
         return new Date(b.dt) - new Date(a.dt);
       });

@@ -37,7 +37,15 @@
   flex: 1;
 }
 
-/* ── TIME FILTER ──────────────────────────────────── */
+/* ── TIME FILTER BAR ──────────────────────────────── */
+.tf-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--bd);
+  background: var(--bg);
+}
 .tf-trigger {
   display: flex;
   align-items: center;
@@ -175,9 +183,10 @@
   background: var(--bg);
 }
 
-/* ── BOTTOM NAV ───────────────────────────────────── */
-.bnav-logo { display: none; } /* yalnız desktop'ta görünür */
-.main-col  { display: contents; } /* mobilde wrapper gibi davranmaz */
+/* tf-bar mobilde bnav içinde gizli — topbar'da ayrı yönetilir */
+.bnav .tf-bar { display: none; }
+.bnav-logo    { display: none; }
+.main-col     { display: contents; }
 
 .bnav {
   position: fixed;
@@ -308,7 +317,7 @@
     flex-direction: column;
   }
 
-  /* Topbar: logo+başlığı gizle, zaman filtresi sağda kalsın */
+  /* Topbar desktop'ta görünür — logo+başlık gizle, zaman filtresi kalsın */
   .topbar .tlogo,
   .topbar .ttitle { display: none; }
   .topbar-inner { justify-content: flex-end; }

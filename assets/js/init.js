@@ -102,11 +102,26 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
   });
+});
 
-  /* Desktop: tf-bar'ı sidebar slotuna taşı */
-  if (window.matchMedia("(min-width: 768px)").matches) {
-    var tfBar  = document.querySelector(".tf-bar");
-    var tfSlot = document.getElementById("bnav-tf-slot");
-    if (tfBar && tfSlot) tfSlot.appendChild(tfBar);
+/* ── Trep inline expand ── */
+document.addEventListener("click", function(e) {
+  var btn = e.target.closest(".trep-toggle");
+  if (!btn) return;
+  e.stopPropagation();
+  var trep     = btn.closest(".trep");
+  var expanded = trep.getAttribute("data-expanded") === "1";
+  var shortEl  = trep.querySelector(".trep-short");
+  var fullEl   = trep.querySelector(".trep-full");
+  if (expanded) {
+    shortEl.style.display = "";
+    fullEl.style.display  = "none";
+    btn.textContent       = "Devamını gör";
+    trep.setAttribute("data-expanded", "0");
+  } else {
+    shortEl.style.display = "none";
+    fullEl.style.display  = "";
+    btn.textContent       = "Gizle";
+    trep.setAttribute("data-expanded", "1");
   }
 });

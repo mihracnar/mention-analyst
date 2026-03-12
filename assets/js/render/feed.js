@@ -111,23 +111,36 @@ function rFeed() {
     var f   = CF[t.s] || CF.NE;
     var btn = _platformBtn(t.pl);
 
-    var kts = t.kw.split(",").map(function(k) {
-      var ck = k.trim();
-      return '<span class="ktag' + (S.th[ck] ? " hl" : "") + '" data-kw="' + ck + '" style="cursor:pointer">' + proper(ck) + "</span>";
-    }).join("");
+    var kts = t.kw ? t.kw.split(",").filter(function(k){ return k.trim(); }).map(function(k) {
+      var ck = k.trim().toLocaleLowerCase("tr");
+      return '<span class="ktag' + (S.th[ck] ? " hl" : "") + '" data-kw="' + ck + '" style="cursor:pointer">' + proper(k.trim()) + "</span>";
+    }).join("") : "";
 
-    var rep = t.rtt
-      ? '<div class="trep">'
-        + (t.rtt
-          ? '<span class="trep-text">' + t.rtt.slice(0, 120) + (t.rtt.length > 120 ? '…' : '') + '</span>'
-          : '<span class="trep-id">Tweet #' + t.rt + '</span>')
-        + '</div>'
-      : "";
+    var rep = "";
+    if (t.rtt) {
+      var hasMore = t.rtt.length > 120;
+      // yanıtlanan tweeti D[]'den bul
+      var repTweet = t.rt ? D.find(function(x){ return x.id === t.rt; }) : null;
+      var repMeta  = repTweet
+        ? '<span class="trep-user">@' + repTweet.u + '</span>'
+          + '<span class="trep-date">' + fd(repTweet.dt) + '</span>'
+        : '';
+      rep = '<div class="trep" data-expanded="0">'
+        + '<span class="trep-label">↩ Yanıtlanan tweet</span>'
+        + (hasMore
+          ? '<div class="trep-short">' + t.rtt.slice(0, 120) + '…</div>'
+            + '<div class="trep-full" style="display:none">'
+              + (repMeta ? '<div class="trep-meta">' + repMeta + '</div>' : '')
+              + t.rtt
+            + '</div>'
+            + '<button class="trep-toggle">Devamını gör</button>'
+          : '<div class="trep-short">' + t.rtt + '</div>')
+        + '</div>';
+    }
 
     out += '<div class="tcard" style="animation-delay:' + (i * 0.04) + 's">'
       + '<div class="tavcol">'
       + '  <div class="tav" style="background:' + ac(t.u) + ';cursor:pointer" data-user="' + t.u + '">' + ini(t.nm) + "</div>"
-      + (t.rt ? '<div class="tline"></div>' : "")
       + "</div>"
       + '<div class="tright">'
       + '  <div class="thead">'
@@ -138,7 +151,7 @@ function rFeed() {
       + "  </div>"
       + rep
       + '  <div class="tbody">' + t.bd + "</div>"
-      + '  <div class="ttags">' + kts + "</div>"
+      + (kts ? '<div class="ttags">' + kts + "</div>" : "")
       + '  <div class="tact"><a class="talink" href="' + t.lk + '" target="_blank">'
       + btn.icon + " <span>" + btn.text + "</span></a></div>"
       + "</div>"
