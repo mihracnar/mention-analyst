@@ -96,20 +96,12 @@ function loadData(callback) {
         });
       }
       /* emoji, mention, noktalama temizlenince 5 kelime altındakileri ele */
-      function _hasEnoughWords(text) {
-        var clean = text
-          .replace(/@\w+/g, "")                          /* @mention */
-          .replace(/https?:\/\/\S+/g, "")               /* URL */
-          .replace(/[\u{1F000}-\u{1FFFF}]/gu, "")       /* emoji (geniş) */
-          .replace(/[\u2600-\u27BF]/g, "")              /* misc semboller */
-          .replace(/[#.,!?;:'"(){}\[\]\/\\|<>@~`^*%$&=+\-_]/g, " ")
-          .trim();
-        var words = clean.split(/\s+/).filter(function(w) { return w.length > 0; });
-        return words.length >= 3;
+      function _hasEnoughChars(text) {
+        return text && text.length >= 20;
       }
 
       D = out.filter(function(t) {
-        return t.tag !== "Toplu Etiket" && t.tag !== "Reklam" && t.kw && _hasEnoughWords(t.bd);
+        return t.tag !== "Toplu Etiket" && t.tag !== "Reklam" && t.kw && _hasEnoughChars(t.bd);
       }).sort(function(a, b) {
         return new Date(b.dt) - new Date(a.dt);
       });
